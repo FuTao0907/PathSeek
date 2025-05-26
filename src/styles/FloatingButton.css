@@ -1,0 +1,70 @@
+.floating-button-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.floating-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.expanded .floating-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.action-button,
+.main-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(52, 152, 219, 0.8);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.action-button:hover,
+.main-button:hover {
+  background-color: rgba(41, 128, 185, 0.9);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.main-button {
+  background-color: rgba(44, 62, 80, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.main-button svg {
+  transition: transform 0.3s ease;
+}
+
+.expanded .main-button svg {
+  transform: rotate(180deg);
+}
+
+.action-button svg,
+.main-button svg {
+  width: 24px;
+  height: 24px;
+}
