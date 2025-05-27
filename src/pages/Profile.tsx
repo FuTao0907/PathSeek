@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from 'react';
-import '../styles/Profile.css';
+import '@/styles/Profile.css';
 
 interface UserProfile {
   name: string;

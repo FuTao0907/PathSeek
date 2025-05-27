@@ -1,5 +1,189 @@
+/* 默认为白天模式 */
+:root {
+  /* 主色调 */
+  --primary-color: #007bff;
+  --primary-variant: #0056b3;
+  --primary-light: #b3d4ff;
 
-/* Light theme */
+  /* 次色调 */
+  --secondary-color: #6c757d;
+  --secondary-variant: #495057;
+  --secondary-light: #dcdcdc;
+
+  /* 成功色 */
+  --success-color: #28a745;
+  --success-variant: #1e6d35;
+  --success-light: #b3e6c7;
+
+  /* 警告色 */
+  --warning-color: #ffc107;
+  --warning-variant: #e0a800;
+  --warning-light: #fff3c9;
+
+  /* 危险色 */
+  --danger-color: #dc3545;
+  --danger-variant: #a71d2a;
+  --danger-light: #f5c6cb;
+
+  /* 背景色 */
+  --background-color: #f8f9fa;
+  --background-secondary: #e9ecef;
+  --background-tertiary: #ffffff;
+
+  /* 文字色 */
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-light: #f8f9fa;
+  --text-dark: #343a40;
+
+  /* 边框色 */
+  --border-primary: #007bff;
+  --border-secondary: #6c757d;
+  --border-success: #28a745;
+  --border-warning: #ffc107;
+  --border-danger: #dc3545;
+
+  /* 按钮色 */
+  --button-primary-bg: #007bff;
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: #6c757d;
+  --button-secondary-text: #ffffff;
+  --button-success-bg: #28a745;
+  --button-success-text: #ffffff;
+  --button-warning-bg: #ffc107;
+  --button-warning-text: #212529;
+  --button-danger-bg: #dc3545;
+  --button-danger-text: #ffffff;
+
+  /* 输入框色 */
+  --input-bg: #ffffff;
+  --input-text: #212529;
+  --input-border: #ced4da;
+  --input-focus-bg: #ffffff;
+  --input-focus-text: #212529;
+  --input-focus-border: #007bff;
+
+  /* 图标色 */
+  --icon-primary: #007bff;
+  --icon-secondary: #6c757d;
+  --icon-success: #28a745;
+  --icon-warning: #ffc107;
+  --icon-danger: #dc3545;
+
+  /* 阴影色 */
+  --shadow-primary: rgba(0, 123, 255, 0.2);
+  --shadow-secondary: rgba(108, 117, 125, 0.2);
+  --shadow-success: rgba(40, 167, 69, 0.2);
+  --shadow-warning: rgba(255, 193, 7, 0.2);
+  --shadow-danger: rgba(220, 53, 69, 0.2);
+
+  /* 其他颜色 */
+  --highlight-color: #ffeb3b;
+  --divider-color: #e9ecef;
+  --loader-color: #007bff;
+  --selected-color: #007bff;
+  --unselected-color: #6c757d;
+  --disabled-color: #6c757d;
+  --placeholder-color: #6c757d;
+  --link-color: #007bff;
+  --link-hover-color: #0056b3;
+  --link-visited-color: #6c757d;
+}
+
+/* 黑夜模式 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 主色调 */
+    --primary-color: #6666ff;
+    --primary-variant: #333399;
+    --primary-light: #9999ff;
+
+    /* 次色调 */
+    --secondary-color: #999999;
+    --secondary-variant: #666666;
+    --secondary-light: #cccccc;
+
+    /* 成功色 */
+    --success-color: #009933;
+    --success-variant: #006622;
+    --success-light: #66ff99;
+
+    /* 警告色 */
+    --warning-color: #ffcc00;
+    --warning-variant: #cc9900;
+    --warning-light: #ffff99;
+
+    /* 危险色 */
+    --danger-color: #ff3333;
+    --danger-variant: #990000;
+    --danger-light: #ff9999;
+
+    /* 背景色 */
+    --background-color: #121212;
+    --background-secondary: #1e1e1e;
+    --background-tertiary: #2d2d2d;
+
+    /* 文字色 */
+    --text-primary: #ffffff;
+    --text-secondary: #999999;
+    --text-light: #333333;
+    --text-dark: #ffffff;
+
+    /* 边框色 */
+    --border-primary: #6666ff;
+    --border-secondary: #999999;
+    --border-success: #009933;
+    --border-warning: #ffcc00;
+    --border-danger: #ff3333;
+
+    /* 按钮色 */
+    --button-primary-bg: #6666ff;
+    --button-primary-text: #ffffff;
+    --button-secondary-bg: #999999;
+    --button-secondary-text: #ffffff;
+    --button-success-bg: #009933;
+    --button-success-text: #ffffff;
+    --button-warning-bg: #ffcc00;
+    --button-warning-text: #000000;
+    --button-danger-bg: #ff3333;
+    --button-danger-text: #ffffff;
+
+    /* 输入框色 */
+    --input-bg: #2d2d2d;
+    --input-text: #ffffff;
+    --input-border: #444444;
+    --input-focus-bg: #2d2d2d;
+    --input-focus-text: #ffffff;
+    --input-focus-border: #6666ff;
+
+    /* 图标色 */
+    --icon-primary: #6666ff;
+    --icon-secondary: #999999;
+    --icon-success: #009933;
+    --icon-warning: #ffcc00;
+    --icon-danger: #ff3333;
+
+    /* 阴影色 */
+    --shadow-primary: rgba(102, 102, 255, 0.2);
+    --shadow-secondary: rgba(153, 153, 153, 0.2);
+    --shadow-success: rgba(0, 153, 51, 0.2);
+    --shadow-warning: rgba(255, 204, 0, 0.2);
+    --shadow-danger: rgba(255, 51, 51, 0.2);
+
+    /* 其他颜色 */
+    --highlight-color: #ffeb3b;
+    --divider-color: #444444;
+    --loader-color: #6666ff;
+    --selected-color: #6666ff;
+    --unselected-color: #999999;
+    --disabled-color: #999999;
+    --placeholder-color: #999999;
+    --link-color: #6666ff;
+    --link-hover-color: #333399;
+    --link-visited-color: #999999;
+  }
+}
+/* Light theme
 :root[data-theme='light'], :root:not([data-theme='dark']) {
   --background-color: #f0f2f5;
   --text-color: #2c3e50;
@@ -23,7 +207,7 @@
 }
 
 /* Dark theme */
-:root[data-theme='dark'] {
+/* :root[data-theme='dark'] {
   --background-color: #121212;
   --text-color: #ffffff;
   --navbar-bg: #1a1a1a;
@@ -43,7 +227,7 @@
   --card-background: var(--bg-primary);
   --heading-color: var(--text-primary);
   --danger-color: #ff4d4d;
-}
+} */ 
 
 body {
   background-color: var(--background-color);

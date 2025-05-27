@@ -1,5 +1,5 @@
 .navbar {
-  background-color: var(--navbar-bg);
+  background-color: var(--bg-primary);
   height: 60px;
   display: flex;
   justify-content: center;
@@ -7,7 +7,7 @@
   position: sticky;
   top: 0;
   z-index: 999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--box-shadow);
   transition: all 0.3s ease;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .navbar-logo {
-  color: var(--navbar-text);
+  color: var(--text-primary);
   cursor: pointer;
   text-decoration: none;
   display: flex;
@@ -42,7 +42,7 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--navbar-text);
+  border: 2px solid var(--border-primary);
 }
 
 .navbar-logo h1 {
@@ -67,7 +67,7 @@
 }
 
 .navbar-link {
-  color: var(--navbar-text);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -78,18 +78,18 @@
 }
 
 .navbar-link:hover {
-  color: var(--navbar-hover);
-  border-bottom: 3px solid var(--navbar-hover);
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
 }
 
 .theme-toggle {
   margin-left: 10px;
 }
 
-.theme-toggle-button {
+.theme-toggle-button, .add-article-button {
   background: transparent;
-  border: 1px solid var(--navbar-text);
-  color: var(--navbar-text);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
   padding: 5px 10px;
   border-radius: 20px;
   cursor: pointer;
@@ -97,9 +97,53 @@
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
+  gap: 5px;
+}
+
+.add-article-button {
+  margin-left: 10px;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--text-inverse);
+}
+
+.add-article-button:hover {
+  opacity: 0.9;
+}
+
+.add-article-modal {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.add-article-option {
+  flex: 1;
+  padding: 20px;
+  border: 2px dashed var(--border-color);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.add-article-option:hover {
+  border-color: var(--primary-color);
+  background-color: var(--hover-bg);
+}
+
+.add-article-option h3 {
+  margin: 0 0 10px 0;
+  color: var(--text-primary);
+}
+
+.add-article-option p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
 }
 
 .theme-toggle-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--hover-bg);
   transform: scale(1.05);
 }

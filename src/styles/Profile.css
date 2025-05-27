@@ -8,7 +8,7 @@
   background: var(--bg-secondary);
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .profile-header {
@@ -47,7 +47,7 @@
   font-size: 0.8rem;
   opacity: 0.8;
   transition: all 0.2s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +162,7 @@
 
 .skill-tag {
   background-color: var(--primary-color);
-  color: var(--background-color);
+  color: var(--text-inverse);
   padding: 5px 15px;
   border-radius: 15px;
   font-size: 14px;
@@ -176,14 +176,14 @@
   margin-bottom: 10px;
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .remove-skill {
   background: none;
   border: none;
-  color: var(--background-color);
+  color: var(--text-inverse);
   margin-left: 5px;
   cursor: pointer;
   font-size: 16px;
@@ -198,20 +198,20 @@
 }
 
 .project-item {
-  background-color: var(--card-background);
+  background-color: var(--bg-secondary);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .project-item h3 {
   margin: 0 0 10px 0;
-  color: var(--heading-color);
+  color: var(--text-primary);
 }
 
 .project-item p {
   margin: 0 0 15px 0;
-  color: var(--text-color);
+  color: var(--text-secondary);
 }
 
 .project-item a {
@@ -220,7 +220,7 @@
 }
 
 .project-edit-item {
-  background-color: var(--card-background);
+  background-color: var(--bg-secondary);
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 15px;
@@ -233,8 +233,8 @@
   margin-bottom: 10px;
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .project-edit-item textarea {
@@ -247,7 +247,7 @@
   width: 100%;
   padding: 10px;
   background-color: var(--primary-color);
-  color: var(--background-color);
+  color: var(--text-inverse);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -258,7 +258,7 @@
 .remove-education {
   padding: 5px 10px;
   background-color: var(--danger-color);
-  color: white;
+  color: var(--text-inverse);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -272,24 +272,24 @@
 }
 
 .education-item {
-  background-color: var(--card-background);
+  background-color: var(--bg-secondary);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .education-item h3 {
   margin: 0 0 10px 0;
-  color: var(--heading-color);
+  color: var(--text-primary);
 }
 
 .education-item p {
   margin: 0;
-  color: var(--text-color);
+  color: var(--text-secondary);
 }
 
 .education-edit-item {
-  background-color: var(--card-background);
+  background-color: var(--bg-secondary);
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 15px;
@@ -301,8 +301,8 @@
   padding: 8px;
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .edit-button,
@@ -317,11 +317,11 @@
 
 .edit-button {
   background: var(--primary-color);
-  color: white;
+  color: var(--text-inverse);
 }
 
 .edit-button:hover {
-  background: var(--primary-color-dark);
+  background: var(--primary-color-hover);
 }
 
 .cancel-button {
