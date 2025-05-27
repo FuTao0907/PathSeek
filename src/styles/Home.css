@@ -28,12 +28,12 @@
   height: 120px;
   border-radius: 60px;
   object-fit: cover;
-  border: 3px solid var(--navbar-hover);
+  border: 3px solid var(--primary-color);
 }
 
 .home-profile-info h1 {
   margin: 0 0 10px 0;
-  color: var(--content-heading);
+  color: var(--text-primary);
   font-size: 2.2rem;
   transition: color 0.3s ease;
 }
@@ -43,13 +43,13 @@
 }
 
 .home-profile-info h1:hover {
-  color: var(--navbar-hover);
+  color: var(--primary-color);
 }
 
 .home-bio {
   font-size: 1.1rem;
   margin: 0 0 15px 0;
-  color: var(--content-text);
+  color: var(--text-secondary);
 }
 
 .home-social-links {
@@ -58,14 +58,14 @@
 }
 
 .home-social-links a {
-  color: var(--navbar-hover);
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .home-social-links a:hover {
-  color: var(--content-heading);
+  color: var(--text-primary);
 }
 
 .recent-posts {
@@ -80,17 +80,15 @@
 }
 
 .home-post-card {
-  background: linear-gradient(135deg, var(--content-bg) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: var(--bg-primary);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--box-shadow);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: row;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
   margin-bottom: 1rem;
 }
 
@@ -110,7 +108,7 @@
 }
 
 .action-button {
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--primary-color);
   border: none;
   border-radius: 50%;
   width: 32px;
@@ -120,16 +118,15 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  color: rgba(255, 255, 255, 1);
+  box-shadow: var(--box-shadow);
+  color: var(--text-inverse);
+  opacity: 0.9;
 }
 
 .action-button:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  color: rgba(255, 255, 255, 1);
+  box-shadow: var(--box-shadow-hover);
 }
 
 .action-button.delete-button:hover {
@@ -151,19 +148,19 @@
 }
 
 .modal-content {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--bg-primary);
   backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 8px;
   max-width: 500px;
   width: 90%;
   position: relative;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .modal-content h2 {
   margin: 0 0 20px 0;
-  color: var(--content-heading);
+  color: var(--text-primary);
 }
 
 .form-group {
@@ -173,7 +170,7 @@
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: var(--content-heading);
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -181,20 +178,20 @@
 .form-group textarea {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid var(--border-color);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--content-text);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   font-size: 1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--box-shadow);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--navbar-hover);
-  box-shadow: 0 0 0 2px rgba(var(--navbar-hover-rgb), 0.2);
+  border-color: var(--primary-color);
+  box-shadow: var(--focus-shadow);
 }
 
 .image-upload-container {
@@ -205,7 +202,7 @@
 
 .image-input {
   padding: 8px;
-  border: 2px dashed rgba(255, 255, 255, 0.1);
+  border: 2px dashed var(--border-color);
   border-radius: 6px;
   cursor: pointer;
 }
@@ -240,35 +237,35 @@
 }
 
 .cancel-button {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--content-text);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
 }
 
 .cancel-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
 }
 
 .save-button {
-  background: #4CAF50;
-  color: #ffffff;
+  background: var(--success-color);
+  color: var(--text-inverse);
   font-weight: 600;
   padding: 10px 24px;
-  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+  box-shadow: var(--box-shadow);
 }
 
 .save-button:hover {
-  background: #45a049;
+  background: var(--success-color-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+  box-shadow: var(--box-shadow-hover);
 }
 
 .delete-button {
-  background: #ff4d4f;
-  color: white;
+  background: var(--danger-color);
+  color: var(--text-inverse);
 }
 
 .delete-button:hover {
-  background: #ff7875;
+  background: var(--danger-color-hover);
   transform: translateY(-1px);
 }
 
@@ -278,15 +275,14 @@
 
 .delete-modal p {
   margin: 0 0 24px 0;
-  color: var(--content-text);
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
 .home-post-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  background: linear-gradient(135deg, var(--content-bg) 0%, rgba(255, 255, 255, 0.1) 100%);
+  box-shadow: var(--box-shadow-hover);
+  border-color: var(--primary-color);
 }
 
 .home-post-image {
@@ -344,18 +340,18 @@
   flex: 1;
   position: relative;
   z-index: 1;
-  background: linear-gradient(to right, var(--content-bg), transparent);
+  background: var(--content-bg);
 }
 
 .home-post-title {
   margin: 0 0 12px 0;
   font-size: 1.5rem;
-  color: var(--content-heading);
+  color: var(--text-primary);
   text-decoration: none;
   transition: all 0.3s ease;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   position: relative;
   display: inline-block;
+  font-weight: 600;
 }
 
 .home-post-meta {
@@ -365,12 +361,11 @@
   margin-top: 15px;
   color: var(--text-secondary);
   font-size: 0.9rem;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   padding: 8px 0;
 }
 
 .home-post-date {
-  color: var(--content-text);
+  color: var(--text-secondary);
 }
 
 .home-post-tags {
@@ -379,8 +374,8 @@
 }
 
 .home-tag {
-  background: var(--navbar-hover);
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-primary);
   padding: 3px 8px;
   border-radius: 15px;
   font-size: 0.8rem;
@@ -388,14 +383,14 @@
 
 .home-post-excerpt {
   margin: 15px 0;
-  color: var(--content-text);
+  color: var(--text-secondary);
   line-height: 1.6;
   flex: 1;
 }
 
 .home-read-more {
   display: inline-block;
-  color: var(--navbar-hover);
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
   margin-top: auto;
@@ -403,7 +398,7 @@
 }
 
 .home-read-more:hover {
-  color: var(--content-heading);
+  color: var(--text-primary);
 }
 
 @media (max-width: 768px) {

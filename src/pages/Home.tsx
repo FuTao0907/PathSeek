@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useProfile } from './Profile';
-import '../styles/Home.css';
-import { BlogPost, recentPosts as initialPosts, updatePost, deletePost } from '../data/posts';
+import { useProfile } from '@/pages/Profile';
+import '@/styles/Home.css';
+import { BlogPost, recentPosts as initialPosts, updatePost, deletePost } from '@/data/posts';
 
 interface EditModalProps {
   post: BlogPost | null;
