@@ -1,32 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
 import '@/styles/Navbar.css';
 import { useProfile } from '@/pages/Profile';
+// import { useTheme } from '@/contexts/ThemeContext';
 import { Modal } from '@/components/Modal';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // Initialize useNavigate
   const { profile } = useProfile();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState<boolean>(() => {
-    // 从localStorage获取主题设置，如果没有则默认为false（白天模式）
-    const savedMode = localStorage.getItem('darkMode');
-    return savedMode ? JSON.parse(savedMode) : false;
-  });
-
-  useEffect(() => {
-    // 当darkMode状态改变时，更新document的data-theme属性和localStorage
-    if (darkMode) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode]);
-
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
-  };
+  // const { darkMode, toggleTheme } = useTheme();
 
   return (
     <nav className="navbar">
@@ -52,11 +36,12 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
           ))}
-          <li className="navbar-item theme-toggle">
+          {/* 暂时注释掉主题切换按钮 */}
+          {/* <li className="navbar-item theme-toggle">
             <button onClick={toggleTheme} className="theme-toggle-button">
               {darkMode ? '☀️ 白天模式' : '🌙 黑夜模式'}
             </button>
-          </li>
+          </li> */}
           <li className="navbar-item">
             <button onClick={() => setIsAddModalOpen(true)} className="add-article-button">
               ✍️ 添加文章
@@ -68,8 +53,8 @@ const Navbar: React.FC = () => {
       <Modal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)}>
         <div className="add-article-modal">
           <div className="add-article-option" onClick={() => {
-            // TODO: 实现线上编写功能
             setIsAddModalOpen(false);
+            navigate('/new-post'); // Navigate to the new post page
           }}>
             <h3>线上编写</h3>
             <p>在线编辑 Markdown 文件，配置文章属性</p>

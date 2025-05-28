@@ -1,14 +1,15 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
-import Home from '../pages/Home';
-import About from '../pages/About';
-import NotFound from '../pages/NotFound';
-import Class from '../pages/Class';
-import Post from '../pages/Post';
-import Profile from '../pages/Profile';
-import Navbar from '../components/Navbar';
-import FloatingButton from '../components/FloatingButton';
+import Home from '@/pages/Home';
+import About from '@/pages/About';
+import NotFound from '@/pages/NotFound';
+import Class from '@/pages/Class';
+import Post from '@/pages/Post';
+import Profile from '@/pages/Profile';
+import NewPost from '@/pages/NewPost';
+import Navbar from '@/components/Navbar';
+import FloatingButton from '@/components/FloatingButton';
 import { useState, useCallback } from 'react';
-import '../styles/App.css';
+import '@/styles/App.css';
 
 const Layout = () => {
   const [backgroundImage, setBackgroundImage] = useState('');
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />
+      },
+      {
+        path: 'new-post', // Add route for NewPost
+        element: <NewPost />
       },
       {
         path: '*',

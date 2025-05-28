@@ -62,47 +62,51 @@ const EditModal: React.FC<EditModalProps> = ({ post, isOpen, onClose, onSave }) 
       <div className="modal-content" onClick={e => e.stopPropagation()}>
         <h2>编辑文章</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>文章图片</label>
-            <div className="image-upload-container">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="image-input"
-              />
-              {previewUrl && (
-                <div className="image-preview">
-                  <img src={previewUrl} alt="预览" />
-                </div>
-              )}
+          <div className="modal-form-left">
+            <div className="form-group">
+              <label>文章图片</label>
+              <div className="image-upload-container">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="image-input"
+                />
+                {previewUrl && (
+                  <div className="image-preview">
+                    <img src={previewUrl} alt="预览" />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <div className="form-group">
-            <label>文章标题</label>
-            <input
-              type="text"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>文章简介</label>
-            <textarea
-              value={excerpt}
-              onChange={e => setExcerpt(e.target.value)}
-              required
-              rows={4}
-            />
-          </div>
-          <div className="modal-actions">
-            <button type="button" onClick={onClose} className="cancel-button">
-              取消
-            </button>
-            <button type="submit" className="save-button">
-              保存
-            </button>
+          <div className="modal-form-right">
+            <div className="form-group">
+              <label>文章标题</label>
+              <input
+                type="text"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>文章简介</label>
+              <textarea
+                value={excerpt}
+                onChange={e => setExcerpt(e.target.value)}
+                required
+                rows={6}
+              />
+            </div>
+            <div className="modal-actions">
+              <button type="button" onClick={onClose} className="cancel-button">
+                取消
+              </button>
+              <button type="submit" className="save-button">
+                保存
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -203,45 +207,74 @@ const Home: React.FC = () => {
           <div className="home-post-list">
             {posts.map(post => (
               <article key={post.id} className="home-post-card">
-                <div className="post-actions">
+                <div className="home-post-card-actions">
                   <button
-                    className="action-button edit-button"
-                    onClick={() => handleEdit(post)}
+                    className="home-post-card-action edit-action"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleEdit(post);
+                    }}
                     title="编辑文章"
                   >
-                    <svg viewBox="0 0 24 24" width="16" height="16">
-                      <path fill="currentColor" d="M19.4 7.34L16.66 4.6A2 2 0 0014 4.53l-9 9a2 2 0 00-.57 1.21L4 18.91a1 1 0 00.29.8A1 1 0 005 20h.09l4.17-.38a2 2 0 001.21-.57l9-9a1.92 1.92 0 00-.07-2.71zM9.08 17.62l-3 .28.27-3L12 9.32l2.7 2.7zM16 10.68L13.32 8l1.95-2L18 8.73z"/>
-                    </svg>
+                    <span>
+                      <svg viewBox="0 0 24 24" width="18" height="18">
+                        <path fill="currentColor" d="M19.4 7.34L16.66 4.6A2 2 0 0014 4.53l-9 9a2 2 0 00-.57 1.21L4 18.91a1 1 0 00.29.8A1 1 0 005 20h.09l4.17-.38a2 2 0 001.21-.57l9-9a1.92 1.92 0 00-.07-2.71zM9.08 17.62l-3 .28.27-3L12 9.32l2.7 2.7zM16 10.68L13.32 8l1.95-2L18 8.73z"/>
+                      </svg>
+                    </span>
                   </button>
                   <button
-                    className="action-button delete-button"
-                    onClick={() => handleDelete(post)}
+                    className="home-post-card-action delete-action"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleDelete(post);
+                    }}
                     title="删除文章"
                   >
-                    <svg viewBox="0 0 24 24" width="16" height="16">
-                      <path fill="currentColor" d="M19 7a1 1 0 00-1 1v11.191A1.92 1.92 0 0116.191 21H7.81A1.92 1.92 0 016 19.191V8a1 1 0 00-2 0v11.191A3.918 3.918 0 007.81 23h8.381A3.918 3.918 0 0020 19.191V8a1 1 0 00-1-1zm1-3h-4V3a1 1 0 00-1-1H9a1 1 0 00-1 1v1H4a1 1 0 000 2h16a1 1 0 000-2zM10 3h4v1h-4z"/>
-                      <path fill="currentColor" d="M9 17V9a1 1 0 00-2 0v8a1 1 0 002 0zm4 0V9a1 1 0 00-2 0v8a1 1 0 002 0zm4 0V9a1 1 0 00-2 0v8a1 1 0 002 0z"/>
-                    </svg>
+                    <span>
+                      <svg viewBox="0 0 24 24" width="18" height="18">
+                        <path fill="currentColor" d="M19 7a1 1 0 00-1 1v11.191A1.92 1.92 0 0016.191 21H7.81A1.92 1.92 0 016 19.191V8a1 1 0 00-2 0v11.191A3.918 3.918 0 007.81 23h8.381A3.918 3.918 0 0020 19.191V8a1 1 0 00-1-1zm1-3h-4V3a1 1 0 00-1-1H9a1 1 0 00-1 1v1H4a1 1 0 000 2h16a1 1 0 000-2zM10 3h4v1h-4z"/>
+                        <path fill="currentColor" d="M9 17V9a1 1 0 00-2 0v8a1 1 0 002 0zm4 0V9a1 1 0 00-2 0v8a1 1 0 002 0zm4 0V9a1 1 0 00-2 0v8a1 1 0 002 0z"/>
+                      </svg>
+                    </span>
                   </button>
                 </div>
-                {post.imageUrl && (
-                  <div className="home-post-image" onClick={() => post.imageUrl && handleImageClick(post.imageUrl)}>
-                    <img src={post.imageUrl} alt={post.title} />
+                <Link to={`/post/${post.id}`} className="home-post-card-link">
+                  {post.imageUrl && (
+                    <div className="home-post-image">
+                      <img 
+                        src={post.imageUrl} 
+                        alt={post.title}
+                      />
+                      <div 
+                        className="home-post-image-overlay"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          post.imageUrl && handleImageClick(post.imageUrl);
+                        }}
+                        title="点击查看大图"
+                      >
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+                          <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                  <div className="home-post-content">
+                    <h3 className="home-post-title">{post.title}</h3>
+                    <p className="home-post-meta">
+                      <span className="home-post-date">{post.date}</span>
+                      <span className="home-post-tags">
+                        {post.tags.map(tag => (
+                          <span key={tag} className="home-tag">{tag}</span>
+                        ))}
+                      </span>
+                    </p>
+                    <p className="home-post-excerpt">{post.excerpt}</p>
                   </div>
-                )}
-                <div className="home-post-content">
-                  <h3 className="home-post-title">{post.title}</h3>
-                  <p className="home-post-meta">
-                    <span className="home-post-date">{post.date}</span>
-                    <span className="home-post-tags">
-                      {post.tags.map(tag => (
-                        <span key={tag} className="home-tag">{tag}</span>
-                      ))}
-                    </span>
-                  </p>
-                  <p className="home-post-excerpt">{post.excerpt}</p>
-                  <Link to={`/post/${post.id}`} className="home-read-more">阅读全文</Link>
-                </div>
+                </Link>
               </article>
             ))}
           </div>
