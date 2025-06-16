@@ -25,7 +25,7 @@
 /* 主内容区域 - 卡片式设计 */
 .content-area {
   flex: 1;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: var(--spacing-lg) auto;
   padding: var(--spacing-xl);
   background: var(--bg-card);

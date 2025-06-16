@@ -1,26 +1,32 @@
 /* 现代化主页样式 */
 .home-container {
   padding: 3rem;
-  max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(226, 232, 240, 0.9) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23667eea;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%23764ba2;stop-opacity:0.1"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23bg)"/><circle cx="200" cy="200" r="100" fill="%23667eea" opacity="0.05"/><circle cx="800" cy="300" r="150" fill="%23764ba2" opacity="0.05"/><circle cx="400" cy="700" r="120" fill="%23667eea" opacity="0.05"/><circle cx="700" cy="800" r="80" fill="%23764ba2" opacity="0.05"/></svg>');
+  background: linear-gradient(
+      135deg,
+      rgba(248, 250, 252, 0.9) 0%,
+      rgba(226, 232, 240, 0.9) 100%
+    ),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23667eea;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%23764ba2;stop-opacity:0.1"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23bg)"/><circle cx="200" cy="200" r="100" fill="%23667eea" opacity="0.05"/><circle cx="800" cy="300" r="150" fill="%23764ba2" opacity="0.05"/><circle cx="400" cy="700" r="120" fill="%23667eea" opacity="0.05"/><circle cx="700" cy="800" r="80" fill="%23764ba2" opacity="0.05"/></svg>');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  gap: 3rem;
 }
 
 /* 个人资料卡片 */
 .home-profile-section {
+  height: 400px;
   margin-bottom: 3rem;
   padding: 3rem;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   border-radius: 24px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   display: flex;
   align-items: center;
   border: 3px solid #e2e8f0;
@@ -30,13 +36,13 @@
 }
 
 .home-profile-section:hover {
-  transform: translateY(-8px);
+  /* transform: translateY(-8px); */
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   border-color: #3b82f6;
 }
 
 .home-profile-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -46,7 +52,8 @@
 }
 
 .home-avatar-container {
-  margin-right: 3rem;
+  /* margin-right: 3rem; */
+  text-align: center;
   text-decoration: none;
   display: block;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -58,18 +65,21 @@
 }
 
 .home-avatar {
-  width: 160px;
-  height: 160px;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #3b82f6;
-  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -2px rgba(59, 130, 246, 0.2);
+  border: 3px solid #3b82f6;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3),
+    0 4px 6px -2px rgba(59, 130, 246, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .home-avatar-container:hover .home-avatar {
   border-color: #2563eb;
-  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.4), 0 10px 10px -5px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.4),
+    0 10px 10px -5px rgba(59, 130, 246, 0.3);
 }
 
 .home-profile-info h1 {
@@ -112,26 +122,32 @@
   text-decoration: none;
   font-weight: 700;
   font-size: 0.875rem;
-  padding: 0.75rem 1.25rem;
+  /* padding: 0.75rem 1.25rem; */
   border-radius: 12px;
   border: 2px solid #3b82f6;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(59, 130, 246, 0.05) 100%
+  );
 }
 
 .home-social-links a:hover {
   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: #ffffff;
   transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4), 0 4px 6px -2px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4),
+    0 4px 6px -2px rgba(59, 130, 246, 0.3);
 }
 
 /* 最近文章区域 */
 .recent-posts {
   margin-top: 3rem;
+  overflow-y: auto;
 }
 
 .recent-posts h2 {
@@ -148,7 +164,7 @@
 }
 
 .recent-posts h2::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -223,7 +239,11 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(248, 250, 252, 0.95) 100%
+  );
   backdrop-filter: blur(10px);
   border: 2px solid rgba(226, 232, 240, 0.8);
   display: flex;
@@ -231,7 +251,8 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.15),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   color: #64748b;
   font-size: 1rem;
   position: relative;
@@ -239,7 +260,7 @@
 }
 
 .home-post-card-action::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -258,7 +279,8 @@
 .home-post-card-action:hover {
   color: #ffffff;
   transform: scale(1.15) rotate(5deg);
-  box-shadow: 0 15px 35px -5px rgba(59, 130, 246, 0.4), 0 8px 15px -3px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 15px 35px -5px rgba(59, 130, 246, 0.4),
+    0 8px 15px -3px rgba(59, 130, 246, 0.3);
   border-color: rgba(59, 130, 246, 0.3);
 }
 
@@ -270,7 +292,11 @@
 
 /* 编辑按钮特殊样式 */
 .home-post-card-action.edit-action {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.1) 0%,
+    rgba(5, 150, 105, 0.1) 100%
+  );
   border-color: rgba(16, 185, 129, 0.3);
   color: #10b981;
 }
@@ -280,13 +306,18 @@
 }
 
 .home-post-card-action.edit-action:hover {
-  box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.4), 0 8px 15px -3px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.4),
+    0 8px 15px -3px rgba(16, 185, 129, 0.3);
   border-color: rgba(16, 185, 129, 0.5);
 }
 
 /* 删除按钮特殊样式 */
 .home-post-card-action.delete-action {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.1) 0%,
+    rgba(220, 38, 38, 0.1) 100%
+  );
   border-color: rgba(239, 68, 68, 0.3);
   color: #ef4444;
 }
@@ -296,7 +327,8 @@
 }
 
 .home-post-card-action.delete-action:hover {
-  box-shadow: 0 15px 35px -5px rgba(239, 68, 68, 0.4), 0 8px 15px -3px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 15px 35px -5px rgba(239, 68, 68, 0.4),
+    0 8px 15px -3px rgba(239, 68, 68, 0.3);
   border-color: rgba(239, 68, 68, 0.5);
 }
 
@@ -426,7 +458,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.2), 0 1px 2px -1px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.2),
+    0 1px 2px -1px rgba(59, 130, 246, 0.1);
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
@@ -434,13 +467,18 @@
 }
 
 .home-tag::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   transition: left 0.6s;
 }
 
@@ -452,7 +490,8 @@
   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: #ffffff;
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4), 0 4px 6px -2px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4),
+    0 4px 6px -2px rgba(59, 130, 246, 0.3);
   border-color: #2563eb;
 }
 
@@ -467,7 +506,8 @@
   background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
   color: #ffffff;
   border-color: #15803d;
-  box-shadow: 0 8px 15px -3px rgba(22, 163, 74, 0.4), 0 4px 6px -2px rgba(22, 163, 74, 0.3);
+  box-shadow: 0 8px 15px -3px rgba(22, 163, 74, 0.4),
+    0 4px 6px -2px rgba(22, 163, 74, 0.3);
 }
 
 .home-tag:nth-child(3n) {
@@ -480,7 +520,8 @@
   background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
   color: #ffffff;
   border-color: #b45309;
-  box-shadow: 0 8px 15px -3px rgba(217, 119, 6, 0.4), 0 4px 6px -2px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 8px 15px -3px rgba(217, 119, 6, 0.4),
+    0 4px 6px -2px rgba(217, 119, 6, 0.3);
 }
 
 .home-tag:nth-child(4n) {
@@ -493,7 +534,8 @@
   background: linear-gradient(135deg, #be185d 0%, #9d174d 100%);
   color: #ffffff;
   border-color: #9d174d;
-  box-shadow: 0 8px 15px -3px rgba(190, 24, 93, 0.4), 0 4px 6px -2px rgba(190, 24, 93, 0.3);
+  box-shadow: 0 8px 15px -3px rgba(190, 24, 93, 0.4),
+    0 4px 6px -2px rgba(190, 24, 93, 0.3);
 }
 
 /* 新建文章表单 */
@@ -502,7 +544,8 @@
   border-radius: 20px;
   padding: 3rem;
   margin-bottom: 3rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border: 2px solid #e2e8f0;
 }
 
@@ -546,13 +589,26 @@
 .new-post-form textarea:focus {
   outline: none;
   border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1),
+    0 4px 6px -1px rgba(0, 0, 0, 0.1);
   background: #ffffff;
 }
 
 .new-post-form textarea {
   min-height: 120px;
   resize: vertical;
+}
+/* 预览图片 */
+.image-preview-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 文件上传区域 */
@@ -572,7 +628,8 @@
 .file-upload-area:hover {
   border-color: #3b82f6;
   background: linear-gradient(135deg, #f1f5f9 0%, #dbeafe 100%);
-  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1),
+    0 4px 6px -2px rgba(59, 130, 246, 0.05);
 }
 
 .file-upload-icon {
@@ -585,7 +642,8 @@
   justify-content: center;
   color: #ffffff;
   font-size: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3), 0 2px 4px -1px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3),
+    0 2px 4px -1px rgba(59, 130, 246, 0.2);
 }
 
 /* 表单按钮 */
@@ -609,7 +667,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
@@ -617,13 +676,18 @@
 }
 
 .form-button::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   transition: left 0.6s;
 }
 
@@ -635,14 +699,16 @@
   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   border-color: #3b82f6;
   color: #ffffff;
-  box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4), 0 4px 6px -2px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 15px -3px rgba(59, 130, 246, 0.4),
+    0 4px 6px -2px rgba(59, 130, 246, 0.3);
 }
 
 .form-button.primary:hover {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   border-color: #2563eb;
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 15px 25px -5px rgba(59, 130, 246, 0.5), 0 8px 10px -3px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 15px 25px -5px rgba(59, 130, 246, 0.5),
+    0 8px 10px -3px rgba(59, 130, 246, 0.4);
 }
 
 .form-button.secondary {
@@ -656,7 +722,8 @@
   border-color: #94a3b8;
   color: #475569;
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 15px -3px rgba(100, 116, 139, 0.3), 0 4px 6px -2px rgba(100, 116, 139, 0.2);
+  box-shadow: 0 10px 15px -3px rgba(100, 116, 139, 0.3),
+    0 4px 6px -2px rgba(100, 116, 139, 0.2);
 }
 
 /* 删除确认模态框 */
@@ -677,36 +744,36 @@
   .home-container {
     padding: 1.5rem;
   }
-  
+
   .home-profile-section {
     flex-direction: column;
     text-align: center;
     padding: 2rem;
   }
-  
+
   .home-avatar-container {
     margin-right: 0;
     margin-bottom: 2rem;
   }
-  
+
   .home-avatar {
     width: 120px;
     height: 120px;
   }
-  
+
   .home-profile-info h1 {
     font-size: 2rem;
   }
-  
+
   .home-post-card {
     flex-direction: column;
   }
-  
+
   .home-post-image {
     width: 100%;
     height: 200px;
   }
-  
+
   .home-social-links {
     justify-content: center;
     flex-wrap: wrap;
