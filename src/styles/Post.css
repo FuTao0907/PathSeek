@@ -1,16 +1,76 @@
+/* 导入模块化样式 */
+@import './variables.css';
+@import './components.css';
+@import './markdown.css';
+@import './responsive.css';
+
 /* 文章页面容器 */
 .post-page {
   background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  max-width: 1000px;
-  margin: 2rem auto;
-  min-height: calc(100vh - 4rem);
-  border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: var(--spacing-xl) auto;
+  min-height: calc(100vh - var(--navbar-height, 80px) - var(--spacing-2xl));
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
+  transition: all var(--transition-cubic);
+}
+
+.post-page:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* 阅读进度条 */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    var(--primary-dark) 50%,
+    var(--secondary-color) 100%
+  );
+  z-index: var(--z-fixed);
+  transition: width 0.1s ease-out;
+  box-shadow: var(--shadow-primary);
+}
+
+/* 文章容器 */
+.post-content {
+  padding: var(--spacing-4xl);
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: var(--radius-lg);
+  margin: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-primary);
+}
+
+/* 深色模式下的文章容器背景 */
+[data-theme='dark'] .post-content {
+  background: rgba(17, 24, 39, 0.95);
+}
+
+/* 高对比度模式下的文章容器背景 */
+[data-theme='high-contrast'] .post-content {
+  background: rgba(255, 255, 255, 0.98);
+  border: 2px solid var(--border-primary);
+}
+
+/* 护眼模式下的文章容器背景 */
+[data-theme='eye-care'] .post-content {
+  background: rgba(254, 243, 199, 0.95);
 }
 
 .post-page::before {
@@ -20,18 +80,35 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-gradient);
   z-index: 1;
 }
 
 /* 文章头部图片 */
 .post-header-image {
-  margin: -2rem -2rem 2rem;
-  height: 350px;
+  margin: 0;
+  height: 400px;
   overflow: hidden;
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--radius-3xl) var(--radius-3xl) 0 0;
   position: relative;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -50px 100px var(--shadow-inset);
+}
+
+.post-header-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--overlay-light) 40%,
+    var(--overlay-medium) 80%,
+    var(--overlay-dark) 100%
+  );
+  z-index: 2;
 }
 
 .post-header-image::after {
@@ -41,62 +118,131 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.2) 100%);
-  z-index: 1;
+  background: radial-gradient(
+    circle at center,
+    transparent 30%,
+    var(--primary-overlay) 100%
+  );
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.post-header-image:hover::after {
+  opacity: 1;
 }
 
 .post-header-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.95) contrast(1.05);
 }
 
 .post-header-image:hover img {
-  transform: scale(1.03);
-  filter: brightness(1.1) saturate(1.1);
+  transform: scale(1.05);
+  filter: brightness(1.1) saturate(1.2) contrast(1.1);
+}
+
+/* 图片加载动画 */
+.post-header-image img {
+  animation: imageLoad 0.8s ease-out;
+}
+
+@keyframes imageLoad {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* 文章头部 */
 .post-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--spacing-5xl);
   text-align: center;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: var(--spacing-5xl) var(--spacing-4xl) var(--spacing-4xl);
+  background: linear-gradient(
+    135deg,
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 100%
+  );
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border-primary);
+  border-top: none;
   position: relative;
+  overflow: hidden;
 }
 
 .post-header::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 3px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--primary-overlay) 20%,
+    var(--secondary-overlay) 50%,
+    var(--accent-overlay) 80%,
+    transparent 100%
+  );
+}
+
+.post-header::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+  animation: headerGlow 8s ease-in-out infinite;
+}
+
+@keyframes headerGlow {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
 }
 
 .post-header h1 {
-  font-size: 2.25rem;
-  color: #1e293b;
-  margin-bottom: 1.5rem;
-  font-weight: 800;
-  line-height: 1.3;
-  background: linear-gradient(135deg, #1e293b 0%, #667eea 100%);
+  font-size: clamp(2rem, 4vw, var(--font-size-5xl));
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-3xl);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-tight);
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--primary-color) 30%,
+    var(--primary-color) 70%,
+    var(--primary-dark) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-cubic);
+  position: relative;
+  z-index: 2;
+  text-shadow: var(--text-shadow);
 }
 
 .post-header h1:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
+  filter: brightness(1.1);
 }
 
 /* 文章元信息 */
@@ -104,40 +250,66 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  color: #64748b;
-  font-size: 0.875rem;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
   font-weight: 500;
+  position: relative;
+  z-index: 2;
 }
 
 .post-date {
-  color: #64748b;
-  font-weight: 500;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(
+    135deg,
+    var(--bg-tertiary, #f1f5f9) 0%,
+    var(--bg-quaternary, #e2e8f0) 100%
+  );
+  border-radius: 25px;
+  border: 2px solid var(--border-muted);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.post-date::before {
+  content: '📅';
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.post-date:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-secondary);
 }
 
 .post-tags {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .post-tags .tag {
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 25px;
+  font-weight: 700;
   border: 2px solid transparent;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 0.4rem;
+  box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   font-size: 0.75rem;
+  cursor: pointer;
 }
 
 .post-tags .tag::before {
@@ -147,52 +319,147 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--bg-overlay),
+    transparent
+  );
+  transition: left 0.6s ease;
 }
 
 .post-tags .tag:hover::before {
   left: 100%;
 }
 
+.post-tags .tag::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--bg-overlay);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+
+.post-tags .tag:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
 .post-tags .tag:nth-child(1) {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-color: #667eea;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  color: var(--text-white);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-primary);
+}
+
+.post-tags .tag:nth-child(1)::before {
+  content: '🎨';
+  margin-right: 0.3rem;
+  font-size: 0.8rem;
 }
 
 .post-tags .tag:nth-child(2) {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
-  border-color: #f093fb;
-  box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+  background: linear-gradient(
+    135deg,
+    var(--accent-color) 0%,
+    var(--error-color) 100%
+  );
+  color: var(--text-white);
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-accent);
+}
+
+.post-tags .tag:nth-child(2)::before {
+  content: '💡';
+  margin-right: 0.3rem;
+  font-size: 0.8rem;
 }
 
 .post-tags .tag:nth-child(3) {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
-  border-color: #4facfe;
-  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+  background: linear-gradient(
+    135deg,
+    var(--info-color) 0%,
+    var(--info-light) 100%
+  );
+  color: var(--text-white);
+  border-color: var(--info-color);
+  box-shadow: var(--shadow-info);
+}
+
+.post-tags .tag:nth-child(3)::before {
+  content: '🚀';
+  margin-right: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.post-tags .tag:nth-child(4) {
+  background: linear-gradient(
+    135deg,
+    var(--success-light) 0%,
+    var(--accent-light) 100%
+  );
+  color: var(--text-primary);
+  border-color: var(--success-light);
+  box-shadow: var(--shadow-success);
+}
+
+.post-tags .tag:nth-child(4)::before {
+  content: '⭐';
+  margin-right: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.post-tags .tag:nth-child(5) {
+  background: linear-gradient(
+    135deg,
+    var(--warning-light) 0%,
+    var(--warning-color) 100%
+  );
+  color: var(--text-primary);
+  border-color: var(--warning-light);
+  box-shadow: var(--shadow-warning);
+}
+
+.post-tags .tag:nth-child(5)::before {
+  content: '🔥';
+  margin-right: 0.3rem;
+  font-size: 0.8rem;
 }
 
 .post-tags .tag:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: var(--shadow-xl);
+  filter: brightness(1.1) saturate(1.2);
 }
 
 /* 文章内容 */
 .post-body {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #374151;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  color: var(--text-color);
+  background: linear-gradient(135deg, var(--bg-glass), var(--bg-glass-light));
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--border-primary);
   position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.post-body:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
 }
 
 .post-body::before {
@@ -200,21 +467,57 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 6px;
-  height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 0 3px 3px 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  border-radius: 20px 20px 0 0;
 }
+
+.post-body::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: contentGlow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes contentGlow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* Markdown 样式已移至 markdown.css 模块 */
+
+/* 所有 Markdown 样式已移至 markdown.css 模块 */
+
+/* 所有 Markdown 样式已移至 markdown.css 模块 */
 
 /* 文章标题样式 */
 .post-body h2 {
-  font-size: 1.875rem;
-  margin: 3rem 0 1.5rem;
-  color: #1e293b;
-  font-weight: 800;
+  font-size: var(--font-size-2xl);
+  margin: var(--spacing-3xl) 0 var(--spacing-xl);
+  color: var(--text-color);
+  font-weight: var(--font-weight-bold);
   position: relative;
-  padding-left: 2rem;
-  background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+  padding-left: var(--spacing-lg);
+  background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -227,17 +530,17 @@
   top: 0;
   bottom: 0;
   width: 6px;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  border-radius: 3px;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-sm);
 }
 
 .post-body h3 {
-  font-size: 1.5rem;
-  margin: 2.5rem 0 1rem;
-  color: #1e293b;
-  font-weight: 700;
+  font-size: var(--font-size-xl);
+  margin: var(--spacing-2xl) 0 var(--spacing-md);
+  color: var(--text-color);
+  font-weight: var(--font-weight-semibold);
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: var(--spacing-md);
 }
 
 .post-body h3::before {
@@ -248,71 +551,71 @@
   transform: translateY(-50%);
   width: 4px;
   height: 20px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  border-radius: 2px;
+  background: var(--secondary-gradient);
+  border-radius: var(--radius-xs);
 }
 
 .post-body h4 {
-  font-size: 1.25rem;
-  margin: 2rem 0 0.75rem;
-  color: #374151;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  margin: var(--spacing-xl) 0 var(--spacing-sm);
+  color: var(--text-color);
+  font-weight: var(--font-weight-medium);
 }
 
 /* 段落样式 */
 .post-body p {
-  margin: 1.5rem 0;
+  margin: var(--spacing-xl) 0;
   text-align: justify;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-base);
 }
 
 .post-body p:hover {
-  color: #1e293b;
+  color: var(--text-color);
 }
 
 /* 列表样式 */
 .post-body ul,
 .post-body ol {
-  margin: 1.5rem 0;
-  padding-left: 2rem;
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  border-radius: 12px;
-  padding: 1.5rem 2rem;
-  border-left: 4px solid #3b82f6;
+  margin: var(--spacing-xl) 0;
+  padding-left: var(--spacing-lg);
+  background: var(--surface-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  border-left: 4px solid var(--primary-color);
 }
 
 .post-body li {
-  margin: 0.75rem 0;
-  color: #374151;
+  margin: var(--spacing-sm) 0;
+  color: var(--text-color);
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-base);
 }
 
 .post-body li:hover {
-  color: #1e293b;
+  color: var(--text-color);
   transform: translateX(5px);
 }
 
 .post-body ul li::marker {
-  color: #3b82f6;
+  color: var(--primary-color);
 }
 
 .post-body ol li::marker {
-  color: #3b82f6;
-  font-weight: 600;
+  color: var(--primary-color);
+  font-weight: var(--font-weight-medium);
 }
 
 /* 引用样式 */
 .post-body blockquote {
-  margin: 2rem 0;
-  padding: 1.5rem 2rem;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-left: 6px solid #f59e0b;
-  border-radius: 0 12px 12px 0;
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  background: var(--warning-bg);
+  border-left: 6px solid var(--warning-color);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
   font-style: italic;
-  color: #92400e;
+  color: var(--warning-text);
   position: relative;
-  box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.1), 0 2px 4px -1px rgba(245, 158, 11, 0.06);
+  box-shadow: var(--shadow-md);
 }
 
 .post-body blockquote::before {
@@ -320,32 +623,32 @@
   position: absolute;
   top: -10px;
   left: 10px;
-  font-size: 3rem;
-  color: #f59e0b;
-  font-weight: 900;
+  font-size: var(--font-size-4xl);
+  color: var(--warning-color);
+  font-weight: var(--font-weight-black);
 }
 
 /* 代码样式 */
 .post-body code {
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  color: #dc2626;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
-  font-size: 0.875rem;
-  font-weight: 600;
-  border: 1px solid #cbd5e1;
+  background: var(--surface-color);
+  color: var(--error-color);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border: 1px solid var(--border-color);
 }
 
 .post-body pre {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  color: #e2e8f0;
-  padding: 1.5rem;
-  border-radius: 12px;
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
   overflow-x: auto;
-  margin: 2rem 0;
-  border: 2px solid #475569;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  margin: var(--spacing-xl) 0;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
 }
 
 .post-body pre code {
@@ -353,16 +656,16 @@
   color: inherit;
   padding: 0;
   border: none;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
 }
 
 /* 链接样式 */
 .post-body a {
-  color: #3b82f6;
+  color: var(--primary-color);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-base);
 }
 
 .post-body a::after {
@@ -372,12 +675,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--primary-gradient);
+  transition: var(--transition-base);
 }
 
 .post-body a:hover {
-  color: #2563eb;
+  color: var(--primary-dark);
 }
 
 .post-body a:hover::after {
@@ -388,115 +691,306 @@
 .post-body img {
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
-  margin: 2rem 0;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  margin: var(--spacing-xl) 0;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition-base);
+  border: 2px solid var(--border-color);
 }
 
 .post-body img:hover {
   transform: scale(1.02);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  border-color: #3b82f6;
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-color);
 }
 
 /* 表格样式 */
 .post-body table {
   width: 100%;
   border-collapse: collapse;
-  margin: 2rem 0;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-radius: 12px;
+  margin: var(--spacing-xl) 0;
+  background: var(--surface-color);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-lg);
 }
 
 .post-body th,
 .post-body td {
-  padding: 1rem;
+  padding: var(--spacing-md);
   text-align: left;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .post-body th {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.875rem;
+  background: var(--primary-gradient);
+  color: var(--white);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .post-body tr:hover {
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  background: var(--surface-color);
 }
 
 /* 分隔线样式 */
 .post-body hr {
-  margin: 3rem 0;
+  margin: var(--spacing-3xl) 0;
   border: none;
   height: 2px;
-  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-  border-radius: 1px;
+  background: var(--border-gradient);
+  border-radius: var(--radius-xs);
+}
+
+/* 文章操作按钮 */
+.post-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-3xl);
+  padding-top: var(--spacing-xl);
+  border-top: 2px solid var(--primary-light);
+}
+
+.post-actions button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border: none;
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.share-btn {
+  background: var(--primary-gradient);
+  color: var(--white);
+  box-shadow: var(--shadow-primary);
+}
+
+.share-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-primary-lg);
+}
+
+.like-btn {
+  background: var(--secondary-gradient);
+  color: var(--white);
+  box-shadow: var(--shadow-secondary);
+}
+
+.like-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-secondary-lg);
+}
+
+.post-actions button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.post-actions button:hover::before {
+  left: 100%;
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+  position: fixed;
+  bottom: var(--spacing-xl);
+  right: var(--spacing-xl);
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--primary-gradient);
+  color: var(--white);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  box-shadow: var(--shadow-primary);
+  transition: var(--transition-base);
+  z-index: var(--z-floating);
+  animation: fadeInUp 0.3s ease;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: var(--shadow-primary-lg);
+}
+
+.back-to-top:active {
+  transform: translateY(-1px) scale(1.05);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .post-page {
-    padding: 1.5rem;
-    margin: 1rem;
+    margin: var(--spacing-md);
+    border-radius: var(--radius-xl);
+  }
+
+  .post-content {
+    padding: var(--spacing-xl);
   }
 
   .post-header-image {
-    margin: -1.5rem -1.5rem 1.5rem;
-    height: 250px;
+    height: 280px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   }
 
   .post-header {
-    padding: 1.5rem;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   }
 
   .post-header h1 {
-    font-size: 2rem;
-  }
-
-  .post-body {
-    font-size: 1rem;
-    padding: 2rem;
-  }
-
-  .post-body h2 {
-    font-size: 1.5rem;
-    margin: 2rem 0 1rem;
-  }
-
-  .post-body h3 {
-    font-size: 1.25rem;
-    margin: 1.5rem 0 0.75rem;
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-lg);
   }
 
   .post-meta {
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--spacing-lg);
+  }
+
+  .post-date {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .post-tags .tag {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-xs);
+  }
+
+  .post-body {
+    font-size: var(--font-size-base);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+  }
+
+  .post-body h2 {
+    font-size: var(--font-size-xl);
+    margin: var(--spacing-xl) 0 var(--spacing-md);
+    padding-left: var(--spacing-lg);
+  }
+
+  .post-body h3 {
+    font-size: var(--font-size-lg);
+    margin: var(--spacing-lg) 0 var(--spacing-sm);
+    padding-left: var(--spacing-md);
   }
 
   .post-body ul,
   .post-body ol {
-    padding: 1rem 1.5rem;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin: var(--spacing-md) 0;
   }
 
   .post-body pre {
-    padding: 1rem;
-    font-size: 0.75rem;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-xs);
+    margin: var(--spacing-lg) 0;
   }
 
   .post-body table {
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
   }
 
   .post-body th,
   .post-body td {
-    padding: 0.75rem 0.5rem;
+    padding: var(--spacing-sm) var(--spacing-xs);
+  }
+
+  /* Markdown 样式已移至 markdown.css 模块 */
+
+  .post-actions {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+  }
+
+  .post-actions button {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-base);
+  }
+
+  .back-to-top {
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    width: 50px;
+    height: 50px;
+    font-size: var(--font-size-lg);
+  }
+
+  .reading-progress {
+    height: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .post-page {
+    margin: var(--spacing-sm);
+    border-radius: var(--radius-lg);
+  }
+
+  .post-content {
+    padding: var(--spacing-lg);
+  }
+
+  .post-header {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .post-header h1 {
+    font-size: var(--font-size-lg);
+  }
+
+  .post-body {
+    padding: var(--spacing-xl);
+    font-size: var(--font-size-sm);
+  }
+
+  .post-header-image {
+    height: 220px;
+  }
+
+  /* Markdown 样式已移至 markdown.css 模块 */
+
+  .back-to-top {
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 45px;
+    height: 45px;
+    font-size: var(--font-size-md);
   }
 }

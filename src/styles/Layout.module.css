@@ -1,0 +1,396 @@
+/* 容器样式 */
+.container {
+  width: 100%;
+}
+
+.container-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-fluid {
+  max-width: none;
+}
+
+.container-xs {
+  max-width: 20rem; /* 320px */
+}
+
+.container-sm {
+  max-width: 24rem; /* 384px */
+}
+
+.container-md {
+  max-width: 28rem; /* 448px */
+}
+
+.container-lg {
+  max-width: 32rem; /* 512px */
+}
+
+.container-xl {
+  max-width: 36rem; /* 576px */
+}
+
+.container-2xl {
+  max-width: 42rem; /* 672px */
+}
+
+.container-full {
+  max-width: 100%;
+}
+
+.container-padding-none {
+  padding: 0;
+}
+
+.container-padding-sm {
+  padding: 0.5rem;
+}
+
+.container-padding-md {
+  padding: 1rem;
+}
+
+.container-padding-lg {
+  padding: 1.5rem;
+}
+
+.container-padding-xl {
+  padding: 2rem;
+}
+
+/* 网格样式 */
+.grid {
+  display: grid;
+  width: 100%;
+}
+
+.grid-gap-none {
+  gap: 0;
+}
+
+.grid-gap-xs {
+  gap: 0.25rem;
+}
+
+.grid-gap-sm {
+  gap: 0.5rem;
+}
+
+.grid-gap-md {
+  gap: 1rem;
+}
+
+.grid-gap-lg {
+  gap: 1.5rem;
+}
+
+.grid-gap-xl {
+  gap: 2rem;
+}
+
+.grid-gap-2xl {
+  gap: 2.5rem;
+}
+
+.grid-gap-3xl {
+  gap: 3rem;
+}
+
+.grid-gap-4xl {
+  gap: 4rem;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.grid-rows-1 {
+  grid-template-rows: repeat(1, minmax(0, 1fr));
+}
+
+.grid-rows-2 {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.grid-rows-3 {
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.grid-rows-4 {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+
+.grid-rows-5 {
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+}
+
+.grid-rows-6 {
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+}
+
+/* 网格项样式 */
+.grid-item {
+  min-width: 0;
+}
+
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.col-span-4 {
+  grid-column: span 4 / span 4;
+}
+
+.col-span-5 {
+  grid-column: span 5 / span 5;
+}
+
+.col-span-6 {
+  grid-column: span 6 / span 6;
+}
+
+.col-span-full {
+  grid-column: 1 / -1;
+}
+
+.row-span-1 {
+  grid-row: span 1 / span 1;
+}
+
+.row-span-2 {
+  grid-row: span 2 / span 2;
+}
+
+.row-span-3 {
+  grid-row: span 3 / span 3;
+}
+
+.row-span-4 {
+  grid-row: span 4 / span 4;
+}
+
+.row-span-5 {
+  grid-row: span 5 / span 5;
+}
+
+.row-span-6 {
+  grid-row: span 6 / span 6;
+}
+
+.row-span-full {
+  grid-row: 1 / -1;
+}
+
+/* Flex样式 */
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
+}
+
+.items-stretch {
+  align-items: stretch;
+}
+
+.flex-gap-none {
+  gap: 0;
+}
+
+.flex-gap-xs {
+  gap: 0.25rem;
+}
+
+.flex-gap-sm {
+  gap: 0.5rem;
+}
+
+.flex-gap-md {
+  gap: 1rem;
+}
+
+.flex-gap-lg {
+  gap: 1.5rem;
+}
+
+.flex-gap-xl {
+  gap: 2rem;
+}
+
+.flex-gap-2xl {
+  gap: 2.5rem;
+}
+
+.flex-gap-3xl {
+  gap: 3rem;
+}
+
+.flex-gap-4xl {
+  gap: 4rem;
+}
+
+/* 间距样式 */
+.spacer {
+  flex-shrink: 0;
+}
+
+.spacer-vertical {
+  width: 100%;
+}
+
+.spacer-horizontal {
+  height: 100%;
+}
+
+/* 垂直间距 */
+.spacer-vertical.spacer-xs {
+  height: 0.25rem;
+}
+
+.spacer-vertical.spacer-sm {
+  height: 0.5rem;
+}
+
+.spacer-vertical.spacer-md {
+  height: 1rem;
+}
+
+.spacer-vertical.spacer-lg {
+  height: 1.5rem;
+}
+
+.spacer-vertical.spacer-xl {
+  height: 2rem;
+}
+
+.spacer-vertical.spacer-2xl {
+  height: 2.5rem;
+}
+
+.spacer-vertical.spacer-3xl {
+  height: 3rem;
+}
+
+.spacer-vertical.spacer-4xl {
+  height: 4rem;
+}
+
+/* 水平间距 */
+.spacer-horizontal.spacer-xs {
+  width: 0.25rem;
+}
+
+.spacer-horizontal.spacer-sm {
+  width: 0.5rem;
+}
+
+.spacer-horizontal.spacer-md {
+  width: 1rem;
+}
+
+.spacer-horizontal.spacer-lg {
+  width: 1.5rem;
+}
+
+.spacer-horizontal.spacer-xl {
+  width: 2rem;
+}
+
+.spacer-horizontal.spacer-2xl {
+  width: 2.5rem;
+}
+
+.spacer-horizontal.spacer-3xl {
+  width: 3rem;
+}
+
+.spacer-horizontal.spacer-4xl {
+  width: 4rem;
+}

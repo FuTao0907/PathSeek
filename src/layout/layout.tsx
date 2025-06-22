@@ -1,12 +1,12 @@
-import Navbar from "@/components/Navbar";
-import FloatingButton from "@/components/FloatingButton";
-import { useState, useCallback } from "react";
-import Content from "@/components/Content";
+import Navbar from '@/features/navigation/Navbar';
+import FloatingButton from '@/shared/components/FloatingButton';
+import { useState, useCallback } from 'react';
+import Content from '@/components/Content';
 
 import '@/styles/Layout.css';
 
 const Layout = () => {
-  const [backgroundImage, setBackgroundImage] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState('');
 
   const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
@@ -18,7 +18,7 @@ const Layout = () => {
 
   const changeBackground = useCallback((file: File) => {
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = e => {
       const imageUrl = e.target?.result as string;
       setBackgroundImage(imageUrl);
     };
@@ -29,11 +29,11 @@ const Layout = () => {
     <div
       className="App"
       style={{
-        backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
+        backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
       }}
     >
       <Navbar />
-      <Content/>
+      <Content />
       <FloatingButton
         onToggleFullscreen={toggleFullscreen}
         onChangeBackground={changeBackground}

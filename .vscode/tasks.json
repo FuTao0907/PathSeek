@@ -1,0 +1,291 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm: start",
+      "type": "npm",
+      "script": "start",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "source": "ts",
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}"
+        ],
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Compiling...",
+          "endsPattern": "webpack compiled|Failed to compile"
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "npm: build",
+      "type": "npm",
+      "script": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$tsc",
+        "$eslint-stylish"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: test",
+      "type": "npm",
+      "script": "test",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "isBackground": false,
+      "problemMatcher": {
+        "owner": "jest",
+        "fileLocation": "absolute",
+        "pattern": [
+          {
+            "regexp": "^\\s*FAIL\\s+(.*)$",
+            "file": 1
+          },
+          {
+            "regexp": "^\\s*●\\s+(.*)$",
+            "message": 1
+          }
+        ]
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: test:watch",
+      "type": "npm",
+      "script": "test",
+      "options": {
+        "env": {
+          "CI": "false"
+        }
+      },
+      "group": "test",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "jest",
+        "fileLocation": "absolute",
+        "pattern": [
+          {
+            "regexp": "^\\s*FAIL\\s+(.*)$",
+            "file": 1
+          },
+          {
+            "regexp": "^\\s*●\\s+(.*)$",
+            "message": 1
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^\\s*No tests found related to files changed since last commit\\.",
+          "endsPattern": "^\\s*Watch Usage"
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: lint",
+      "type": "npm",
+      "script": "lint",
+      "group": "build",
+      "problemMatcher": "$eslint-stylish",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: lint:fix",
+      "type": "npm",
+      "script": "lint",
+      "options": {
+        "env": {
+          "ESLINT_FIX": "true"
+        }
+      },
+      "group": "build",
+      "problemMatcher": "$eslint-stylish",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: type-check",
+      "type": "npm",
+      "script": "type-check",
+      "group": "build",
+      "problemMatcher": "$tsc",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: format",
+      "type": "npm",
+      "script": "format",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: format:check",
+      "type": "npm",
+      "script": "format:check",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: quality:check",
+      "type": "npm",
+      "script": "quality:check",
+      "group": "build",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "npm: lint",
+        "npm: type-check",
+        "npm: format:check"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: quality:fix",
+      "type": "npm",
+      "script": "quality:fix",
+      "group": "build",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "npm: lint:fix",
+        "npm: format"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: quality:report",
+      "type": "npm",
+      "script": "quality:report",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: analyze",
+      "type": "npm",
+      "script": "analyze",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Clean Install",
+      "type": "shell",
+      "command": "npm",
+      "args": ["ci"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Clean Cache",
+      "type": "shell",
+      "command": "npm",
+      "args": ["cache", "clean", "--force"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Full Clean & Install",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Clean Cache",
+        "Clean Install"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ]
+}

@@ -1,16 +1,19 @@
-import React from 'react';
 import { RouterProvider } from 'react-router-dom';
-import router from './routes';
-import { ProfileProvider } from './pages/Profile';
-import { ThemeProvider } from './contexts/ThemeContext';
+import router from '@/routes';
+import { ProfileProvider } from '@/pages/Profile';
+import { ThemeProvider } from '@/features/theme/ThemeContext';
+import ErrorBoundary from '@/shared/components/ErrorBoundary';
+import '@/styles/ErrorBoundary.css';
 
-const App: React.FC = () => {
+const App = () => {
   return (
-    <ThemeProvider>
-      <ProfileProvider>
-        <RouterProvider router={router} />
-      </ProfileProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <ProfileProvider>
+          <RouterProvider router={router} />
+        </ProfileProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 };
 

@@ -1,0 +1,185 @@
+/* 错误边界样式 */
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.error-content {
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-icon {
+  margin: 0 auto 1.5rem;
+  width: 48px;
+  height: 48px;
+  color: #dc3545;
+}
+
+.error-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.error-boundary h2 {
+  color: #343a40;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.error-boundary p {
+  color: #6c757d;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.error-retry-button,
+.error-reload-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.error-retry-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.error-retry-button:hover {
+  background-color: #0056b3;
+}
+
+.error-reload-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.error-reload-button:hover {
+  background-color: #545b62;
+}
+
+.error-details {
+  text-align: left;
+  margin-top: 2rem;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.error-details summary {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  font-weight: 500;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.error-details summary:hover {
+  background-color: #e9ecef;
+}
+
+.error-info {
+  padding: 1rem;
+}
+
+.error-section {
+  margin-bottom: 1.5rem;
+}
+
+.error-section:last-child {
+  margin-bottom: 0;
+}
+
+.error-section h4 {
+  color: #495057;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.error-section pre {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 1rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #495057;
+  margin: 0;
+}
+
+.error-details pre {
+  padding: var(--spacing-md);
+  margin: 0;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.error-retry-button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: var(--color-primary-text);
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.error-retry-button:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.error-retry-button:active {
+  transform: translateY(0);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .error-boundary {
+    padding: var(--spacing-md);
+    min-height: 40vh;
+  }
+
+  .error-content {
+    padding: var(--spacing-lg);
+  }
+
+  .error-content h2 {
+    font-size: var(--font-size-lg);
+  }
+}

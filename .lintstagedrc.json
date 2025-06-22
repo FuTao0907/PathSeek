@@ -1,0 +1,12 @@
+{
+  "src/**/*.{ts,tsx}": [
+    "eslint --fix",
+    "prettier --write"
+  ],
+  "src/**/*.{js,jsx,json,css,scss,md}": [
+    "prettier --write"
+  ],
+  "src/**/*.{ts,tsx,js,jsx}": [
+    "npm run test:ci -- --findRelatedTests --passWithNoTests"
+  ]
+}

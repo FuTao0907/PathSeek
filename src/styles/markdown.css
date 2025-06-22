@@ -1,0 +1,180 @@
+/* Markdown 组件样式模块 */
+@import './variables.css';
+
+/* Markdown 容器 */
+.markdown-content {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-loose);
+  color: var(--text-primary);
+}
+
+/* Markdown 标题样式 */
+.markdown-h1 {
+  font-size: clamp(2rem, 4vw, var(--font-size-5xl));
+  font-weight: var(--font-weight-bold);
+  margin: var(--spacing-3xl) 0 var(--spacing-2xl) 0;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+  line-height: var(--line-height-tight);
+}
+
+.markdown-h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--spacing-xs);
+  background: var(--primary-gradient);
+  border-radius: var(--radius-sm);
+}
+
+.markdown-h2 {
+  font-size: clamp(1.5rem, 3vw, var(--font-size-3xl));
+  font-weight: var(--font-weight-semibold);
+  margin: var(--spacing-3xl) 0 var(--spacing-xl) 0;
+  color: var(--text-primary);
+  position: relative;
+  padding-left: var(--spacing-lg);
+  line-height: var(--line-height-snug);
+}
+
+.markdown-h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--spacing-xs);
+  height: 60%;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-sm);
+}
+
+.markdown-h3 {
+  font-size: clamp(1.25rem, 2.5vw, var(--font-size-2xl));
+  font-weight: var(--font-weight-semibold);
+  margin: var(--spacing-2xl) 0 var(--spacing-lg) 0;
+  color: var(--text-primary);
+  line-height: var(--line-height-snug);
+}
+
+.markdown-h4 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  margin: var(--spacing-xl) 0 var(--spacing-md) 0;
+  color: var(--text-primary);
+}
+
+.markdown-h5 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin: var(--spacing-xl) 0 var(--spacing-sm) 0;
+  color: var(--text-primary);
+}
+
+.markdown-h6 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
+  color: var(--text-primary);
+}
+
+/* Markdown 段落样式 */
+.markdown-p {
+  margin: var(--spacing-lg) 0;
+  line-height: var(--line-height-loose);
+  color: var(--text-primary);
+  text-align: justify;
+  font-size: var(--font-size-lg);
+}
+
+/* Markdown 列表样式 */
+.markdown-ul,
+.markdown-ol {
+  margin: var(--spacing-lg) 0;
+  padding-left: var(--spacing-3xl);
+  background: var(--bg-glass);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  border-left: var(--spacing-xs) solid var(--primary-color);
+  backdrop-filter: blur(var(--blur-sm));
+  box-shadow: var(--shadow-sm);
+}
+
+.markdown-li {
+  margin: var(--spacing-sm) 0;
+  line-height: var(--line-height-relaxed);
+  color: var(--text-primary);
+  position: relative;
+  transition: all var(--transition-base);
+}
+
+.markdown-li:hover {
+  color: var(--text-primary);
+  transform: translateX(var(--spacing-sm));
+}
+
+.markdown-ul .markdown-li::before {
+  content: '•';
+  color: var(--primary-color);
+  font-weight: var(--font-weight-bold);
+  position: absolute;
+  left: calc(-1 * var(--spacing-2xl));
+  top: 0;
+  font-size: var(--font-size-lg);
+}
+
+.markdown-ol {
+  counter-reset: list-counter;
+}
+
+.markdown-ol .markdown-li {
+  counter-increment: list-counter;
+}
+
+.markdown-ol .markdown-li::before {
+  content: counter(list-counter) '.';
+  color: var(--primary-color);
+  font-weight: var(--font-weight-bold);
+  position: absolute;
+  left: calc(-1 * var(--spacing-3xl));
+  top: 0;
+  width: var(--spacing-2xl);
+  text-align: right;
+}
+
+/* Markdown 引用样式 */
+.markdown-blockquote {
+  margin: var(--spacing-2xl) 0;
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  background: linear-gradient(
+    135deg,
+    var(--primary-overlay),
+    var(--secondary-overlay)
+  );
+  border-left: var(--spacing-xs) solid var(--primary-color);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  position: relative;
+  font-style: italic;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+}
+
+.markdown-blockquote::before {
+  content: '"';
+  font-size: var(--font-size-4xl);
+  color: var(--primary-color);
+  position: absolute;
+  top: calc(-1 * var(--spacing-md));
+  left: var(--spacing-md);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+}

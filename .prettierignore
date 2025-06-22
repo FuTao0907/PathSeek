@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+
+# Generated files
+*.min.js
+*.min.css
+
+# Package files
+package-lock.json
+yarn.lock
+
+# Config files
+*.config.js
+craco.config.js
+
+# Documentation
+CHANGELOG.md
+
+# Assets
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+
+# Other
+.env*
+*.log

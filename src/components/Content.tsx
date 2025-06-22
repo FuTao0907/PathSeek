@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom";
-import "@/styles/content.css"
+import { Outlet } from 'react-router-dom';
+import '@/styles/responsive.css';
 const Content = () => {
   return (
     <div className="content">

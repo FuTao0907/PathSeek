@@ -1,0 +1,75 @@
+/* 通知容器基础样式 */
+.notificationContainer {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.notificationContainer > :global(.notification) {
+  pointer-events: auto;
+  position: relative;
+  margin: 0;
+}
+
+/* 位置样式 */
+.notificationContainerTopLeft {
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.notificationContainerTopRight {
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.notificationContainerTopCenter {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notificationContainerBottomLeft {
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
+
+.notificationContainerBottomRight {
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+}
+
+.notificationContainerBottomCenter {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+/* 间距样式 */
+.notificationContainer > :global(.notification) + :global(.notification) {
+  margin-top: 8px;
+}
+
+.notificationContainerBottomLeft > :global(.notification) + :global(.notification),
+.notificationContainerBottomRight > :global(.notification) + :global(.notification),
+.notificationContainerBottomCenter > :global(.notification) + :global(.notification) {
+  margin-top: 0;
+  margin-bottom: 8px;
+}

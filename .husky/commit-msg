@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 检查提交信息格式
+# 格式: type(scope): description
+# 例如: feat(theme): add dark mode support
+
+commit_regex='^(feat|fix|docs|style|refactor|test|chore|perf|ci|build)(\(.+\))?: .{1,50}'
+
+if ! grep -qE "$commit_regex" "$1"; then
+    echo "❌ 提交信息格式不正确!"
+    echo "📝 正确格式: type(scope): description"
+    echo "📋 可用类型:"
+    echo "   feat:     新功能"
+    echo "   fix:      修复bug"
+    echo "   docs:     文档更新"
+    echo "   style:    代码格式调整"
+    echo "   refactor: 代码重构"
+    echo "   test:     测试相关"
+    echo "   chore:    构建/工具链"
+    echo "   perf:     性能优化"
+    echo "   ci:       CI/CD相关"
+    echo "   build:    构建相关"
+    echo "💡 示例: feat(theme): add dark mode support"
+    exit 1
+fi
+
+echo "✅ 提交信息格式正确"

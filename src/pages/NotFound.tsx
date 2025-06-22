@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NotFound: React.FC = () => {
+const NotFound = () => {
   return (
     <div className="content-area">
       <h2>404 - 页面未找到</h2>

@@ -1,0 +1,251 @@
+/* 通知组件基础样式 */
+.notification {
+  position: fixed;
+  z-index: 9999;
+  min-width: 320px;
+  max-width: 480px;
+  margin: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notificationVisible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notificationLeaving {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* 位置样式 */
+.notificationTopLeft {
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.notificationTopLeft.notificationVisible {
+  transform: translateX(0);
+}
+
+.notificationTopLeft.notificationLeaving {
+  transform: translateX(-100%);
+}
+
+.notificationTopRight {
+  top: 0;
+  right: 0;
+}
+
+.notificationTopCenter {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+}
+
+.notificationTopCenter.notificationVisible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.notificationTopCenter.notificationLeaving {
+  transform: translateX(-50%) translateY(-100%);
+}
+
+.notificationBottomLeft {
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.notificationBottomLeft.notificationVisible {
+  transform: translateX(0);
+}
+
+.notificationBottomLeft.notificationLeaving {
+  transform: translateX(-100%);
+}
+
+.notificationBottomRight {
+  bottom: 0;
+  right: 0;
+}
+
+.notificationBottomCenter {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+}
+
+.notificationBottomCenter.notificationVisible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.notificationBottomCenter.notificationLeaving {
+  transform: translateX(-50%) translateY(100%);
+}
+
+/* 内容样式 */
+.notificationContent {
+  padding: 16px;
+}
+
+.notificationHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.notificationIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notificationText {
+  flex: 1;
+  min-width: 0;
+}
+
+.notificationTitle {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  color: #1a1a1a;
+}
+
+.notificationMessage {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #666;
+}
+
+.notificationClose {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  color: #999;
+  transition: all 0.2s;
+}
+
+.notificationClose:hover {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+/* 动作按钮样式 */
+.notificationActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.notificationAction {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.notificationActionPrimary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.notificationActionPrimary:hover {
+  background-color: #1976d2;
+}
+
+.notificationActionSecondary {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.notificationActionSecondary:hover {
+  background-color: #eeeeee;
+}
+
+.notificationActionDanger {
+  background-color: #f44336;
+  color: white;
+}
+
+.notificationActionDanger:hover {
+  background-color: #d32f2f;
+}
+
+/* 进度条样式 */
+.notificationProgress {
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.notificationProgressBar {
+  height: 100%;
+  background-color: currentColor;
+  transition: width 0.1s linear;
+}
+
+/* 类型样式 */
+.notificationSuccess {
+  border-left: 4px solid #4caf50;
+}
+
+.notificationSuccess .notificationIcon {
+  color: #4caf50;
+}
+
+.notificationSuccess .notificationProgressBar {
+  background-color: #4caf50;
+}
+
+.notificationError {
+  border-left: 4px solid #f44336;
+}
+
+.notificationError .notificationIcon {
+  color: #f44336;
+}
+
+.notificationError .notificationProgressBar {
+  background-color: #f44336;
+}
+
+.notificationWarning {
+  border-left: 4px solid #ff9800;
+}
+
+.notificationWarning .notificationIcon {
+  color: #ff9800;
+}
+
+.notificationWarning .notificationProgressBar {
+  background-color: #ff9800;
+}
+
+.notificationInfo {
+  border-left: 4px solid #2196f3;
+}
+
+.notificationInfo .notificationIcon {
+  color: #2196f3;
+}
+
+.notificationInfo .notificationProgressBar {
+  background-color: #2196f3;
+}

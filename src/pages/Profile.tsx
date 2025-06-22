@@ -1,15 +1,18 @@
-import React, { useState, createContext, useContext } from 'react';
 import '@/styles/Profile.css';
+import React, { createContext, useContext, useState } from 'react';
+
+interface SocialLink {
+  id: string;
+  platform: string;
+  url: string;
+  icon: string;
+}
 
 interface UserProfile {
   name: string;
   avatar: string;
   bio: string;
-  socialLinks: {
-    github?: string;
-    twitter?: string;
-    website?: string;
-  };
+  socialLinks: SocialLink[];
   skills: string[];
   projects: Array<{
     name: string;
@@ -29,7 +32,9 @@ interface ProfileContextType {
   setProfile: (profile: UserProfile) => void;
 }
 
-export const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
+export const ProfileContext = createContext<ProfileContextType | undefined>(
+  undefined
+);
 
 export const useProfile = () => {
   const context = useContext(ProfileContext);
@@ -39,32 +44,50 @@ export const useProfile = () => {
   return context;
 };
 
-export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [profile, setProfile] = useState<UserProfile>({
     name: 'Path Seeker',
     avatar: '/avatar-placeholder.svg',
     bio: '热爱探索和分享的开发者',
-    socialLinks: {
-      github: 'https://github.com',
-      twitter: 'https://twitter.com',
-      website: 'https://example.com'
-    },
+    socialLinks: [
+      {
+        id: '1',
+        platform: 'GitHub',
+        url: 'https://github.com',
+        icon: '🐙',
+      },
+      {
+        id: '2',
+        platform: 'Twitter',
+        url: 'https://twitter.com',
+        icon: '🐦',
+      },
+      {
+        id: '3',
+        platform: '个人网站',
+        url: 'https://example.com',
+        icon: '🌐',
+      },
+    ],
     skills: ['React', 'TypeScript', 'Node.js', 'Python', 'Git'],
     projects: [
       {
         name: 'Path Seek',
-        description: '一个现代化的博客平台，支持Markdown编写，具有良好的SEO优化',
-        link: 'https://github.com/path-seek'
-      }
+        description:
+          '一个现代化的博客平台，支持Markdown编写，具有良好的SEO优化',
+        link: 'https://github.com/path-seek',
+      },
     ],
     education: [
       {
         school: '示例大学',
         degree: '学士',
         field: '计算机科学与技术',
-        year: '2019-2023'
-      }
-    ]
+        year: '2019-2023',
+      },
+    ],
   });
 
   return (
@@ -90,7 +113,7 @@ const Profile: React.FC = () => {
       reader.onloadend = () => {
         setProfile({
           ...profile,
-          avatar: reader.result as string
+          avatar: reader.result as string,
         });
       };
       reader.readAsDataURL(file);
@@ -103,7 +126,11 @@ const Profile: React.FC = () => {
         <div className="profile-header">
           <div className="profile-header-top">
             <div className="avatar-container">
-              <img src={profile.avatar} alt="用户头像" className="profile-avatar" />
+              <img
+                src={profile.avatar}
+                alt="用户头像"
+                className="profile-avatar"
+              />
               {isEditing && (
                 <label className="avatar-upload">
                   <input
@@ -112,7 +139,7 @@ const Profile: React.FC = () => {
                     onChange={handleImageChange}
                     style={{ display: 'none' }}
                   />
-                  更换头像
+                  📷
                 </label>
               )}
             </div>
@@ -147,56 +174,103 @@ const Profile: React.FC = () => {
             <h2>社交链接</h2>
             {isEditing ? (
               <div className="social-links-edit">
-                <div className="social-link-input">
-                  <label>GitHub:</label>
-                  <input
-                    type="url"
-                    value={profile.socialLinks.github}
-                    onChange={e => setProfile({
+                {profile.socialLinks.map(link => (
+                  <div key={link.id} className="social-link-input-group">
+                    <div className="social-link-input">
+                      <label>平台名称:</label>
+                      <input
+                        type="text"
+                        value={link.platform}
+                        onChange={e => {
+                          const updatedLinks = profile.socialLinks.map(l =>
+                            l.id === link.id
+                              ? { ...l, platform: e.target.value }
+                              : l
+                          );
+                          setProfile({ ...profile, socialLinks: updatedLinks });
+                        }}
+                        placeholder="如：GitHub, Twitter, 个人网站"
+                      />
+                    </div>
+                    <div className="social-link-input">
+                      <label>链接地址:</label>
+                      <input
+                        type="url"
+                        value={link.url}
+                        onChange={e => {
+                          const updatedLinks = profile.socialLinks.map(l =>
+                            l.id === link.id ? { ...l, url: e.target.value } : l
+                          );
+                          setProfile({ ...profile, socialLinks: updatedLinks });
+                        }}
+                        placeholder="https://..."
+                      />
+                    </div>
+                    <div className="social-link-input">
+                      <label>图标:</label>
+                      <input
+                        type="text"
+                        value={link.icon}
+                        onChange={e => {
+                          const updatedLinks = profile.socialLinks.map(l =>
+                            l.id === link.id
+                              ? { ...l, icon: e.target.value }
+                              : l
+                          );
+                          setProfile({ ...profile, socialLinks: updatedLinks });
+                        }}
+                        placeholder="🔗"
+                        maxLength={2}
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updatedLinks = profile.socialLinks.filter(
+                          l => l.id !== link.id
+                        );
+                        setProfile({ ...profile, socialLinks: updatedLinks });
+                      }}
+                      className="remove-social-link"
+                    >
+                      ❌
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newLink: SocialLink = {
+                      id: Date.now().toString(),
+                      platform: '新平台',
+                      url: '',
+                      icon: '🔗',
+                    };
+                    setProfile({
                       ...profile,
-                      socialLinks: { ...profile.socialLinks, github: e.target.value }
-                    })}
-                  />
-                </div>
-                <div className="social-link-input">
-                  <label>Twitter:</label>
-                  <input
-                    type="url"
-                    value={profile.socialLinks.twitter}
-                    onChange={e => setProfile({
-                      ...profile,
-                      socialLinks: { ...profile.socialLinks, twitter: e.target.value }
-                    })}
-                  />
-                </div>
-                <div className="social-link-input">
-                  <label>个人网站:</label>
-                  <input
-                    type="url"
-                    value={profile.socialLinks.website}
-                    onChange={e => setProfile({
-                      ...profile,
-                      socialLinks: { ...profile.socialLinks, website: e.target.value }
-                    })}
-                  />
-                </div>
+                      socialLinks: [...profile.socialLinks, newLink],
+                    });
+                  }}
+                  className="add-social-link"
+                >
+                  ➕ 添加社交链接
+                </button>
               </div>
             ) : (
               <div className="social-links">
-                {profile.socialLinks.github && (
-                  <a href={profile.socialLinks.github} target="_blank" rel="noopener noreferrer">
-                    GitHub
-                  </a>
-                )}
-                {profile.socialLinks.twitter && (
-                  <a href={profile.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                    Twitter
-                  </a>
-                )}
-                {profile.socialLinks.website && (
-                  <a href={profile.socialLinks.website} target="_blank" rel="noopener noreferrer">
-                    个人网站
-                  </a>
+                {profile.socialLinks.map(
+                  link =>
+                    link.url && (
+                      <a
+                        key={link.id}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span className="social-icon">{link.icon}</span>
+                        {link.platform}
+                      </a>
+                    )
                 )}
               </div>
             )}
@@ -216,7 +290,7 @@ const Profile: React.FC = () => {
                       if (newSkill && !profile.skills.includes(newSkill)) {
                         setProfile({
                           ...profile,
-                          skills: [...profile.skills, newSkill]
+                          skills: [...profile.skills, newSkill],
                         });
                         input.value = '';
                       }
@@ -232,7 +306,9 @@ const Profile: React.FC = () => {
                         onClick={() => {
                           setProfile({
                             ...profile,
-                            skills: profile.skills.filter((_, i) => i !== index)
+                            skills: profile.skills.filter(
+                              (_, i) => i !== index
+                            ),
                           });
                         }}
                         className="remove-skill"
@@ -246,7 +322,9 @@ const Profile: React.FC = () => {
             ) : (
               <div className="skills-list">
                 {profile.skills.map((skill, index) => (
-                  <span key={index} className="skill-tag">{skill}</span>
+                  <span key={index} className="skill-tag">
+                    {skill}
+                  </span>
                 ))}
               </div>
             )}
@@ -263,7 +341,10 @@ const Profile: React.FC = () => {
                       value={project.name}
                       onChange={e => {
                         const newProjects = [...profile.projects];
-                        newProjects[index] = { ...project, name: e.target.value };
+                        newProjects[index] = {
+                          ...project,
+                          name: e.target.value,
+                        };
                         setProfile({ ...profile, projects: newProjects });
                       }}
                       placeholder="项目名称"
@@ -272,7 +353,10 @@ const Profile: React.FC = () => {
                       value={project.description}
                       onChange={e => {
                         const newProjects = [...profile.projects];
-                        newProjects[index] = { ...project, description: e.target.value };
+                        newProjects[index] = {
+                          ...project,
+                          description: e.target.value,
+                        };
                         setProfile({ ...profile, projects: newProjects });
                       }}
                       placeholder="项目描述"
@@ -282,7 +366,10 @@ const Profile: React.FC = () => {
                       value={project.link}
                       onChange={e => {
                         const newProjects = [...profile.projects];
-                        newProjects[index] = { ...project, link: e.target.value };
+                        newProjects[index] = {
+                          ...project,
+                          link: e.target.value,
+                        };
                         setProfile({ ...profile, projects: newProjects });
                       }}
                       placeholder="项目链接"
@@ -291,7 +378,9 @@ const Profile: React.FC = () => {
                       onClick={() => {
                         setProfile({
                           ...profile,
-                          projects: profile.projects.filter((_, i) => i !== index)
+                          projects: profile.projects.filter(
+                            (_, i) => i !== index
+                          ),
                         });
                       }}
                       className="remove-project"
@@ -306,8 +395,8 @@ const Profile: React.FC = () => {
                       ...profile,
                       projects: [
                         ...profile.projects,
-                        { name: '', description: '', link: '' }
-                      ]
+                        { name: '', description: '', link: '' },
+                      ],
                     });
                   }}
                   className="add-project"
@@ -322,7 +411,11 @@ const Profile: React.FC = () => {
                     <h3>{project.name}</h3>
                     <p>{project.description}</p>
                     {project.link && (
-                      <a href={project.link} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         查看项目
                       </a>
                     )}
@@ -343,7 +436,10 @@ const Profile: React.FC = () => {
                       value={edu.school}
                       onChange={e => {
                         const newEducation = [...profile.education];
-                        newEducation[index] = { ...edu, school: e.target.value };
+                        newEducation[index] = {
+                          ...edu,
+                          school: e.target.value,
+                        };
                         setProfile({ ...profile, education: newEducation });
                       }}
                       placeholder="学校名称"
@@ -353,7 +449,10 @@ const Profile: React.FC = () => {
                       value={edu.degree}
                       onChange={e => {
                         const newEducation = [...profile.education];
-                        newEducation[index] = { ...edu, degree: e.target.value };
+                        newEducation[index] = {
+                          ...edu,
+                          degree: e.target.value,
+                        };
                         setProfile({ ...profile, education: newEducation });
                       }}
                       placeholder="学位"
@@ -382,7 +481,9 @@ const Profile: React.FC = () => {
                       onClick={() => {
                         setProfile({
                           ...profile,
-                          education: profile.education.filter((_, i) => i !== index)
+                          education: profile.education.filter(
+                            (_, i) => i !== index
+                          ),
                         });
                       }}
                       className="remove-education"
@@ -397,8 +498,8 @@ const Profile: React.FC = () => {
                       ...profile,
                       education: [
                         ...profile.education,
-                        { school: '', degree: '', field: '', year: '' }
-                      ]
+                        { school: '', degree: '', field: '', year: '' },
+                      ],
                     });
                   }}
                   className="add-education"
@@ -411,7 +512,9 @@ const Profile: React.FC = () => {
                 {profile.education.map((edu, index) => (
                   <div key={index} className="education-item">
                     <h3>{edu.school}</h3>
-                    <p>{edu.degree} · {edu.field}</p>
+                    <p>
+                      {edu.degree} · {edu.field}
+                    </p>
                     <p>{edu.year}</p>
                   </div>
                 ))}
@@ -421,7 +524,7 @@ const Profile: React.FC = () => {
 
           <div className="profile-actions">
             <button
-              onClick={() => isEditing ? handleSave() : setIsEditing(true)}
+              onClick={() => (isEditing ? handleSave() : setIsEditing(true))}
               className="edit-button"
             >
               {isEditing ? '保存' : '编辑资料'}
