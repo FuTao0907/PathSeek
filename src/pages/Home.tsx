@@ -1,9 +1,255 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  BlogPost,
+  deletePost,
+  recentPosts as initialPosts,
+  updatePost,
+} from '@/features/posts/posts';
 import { useProfile } from '@/pages/Profile';
 import '@/styles/Home.css';
-import { BlogPost, recentPosts as initialPosts, updatePost, deletePost } from '@/data/posts';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
+const Home: React.FC = () => {
+  const { profile } = useProfile();
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+
+  const handleEdit = (post: BlogPost) => {
+    setSelectedPost(post);
+    setEditModalOpen(true);
+  };
+
+  const handleDelete = (post: BlogPost) => {
+    setSelectedPost(post);
+    setDeleteModalOpen(true);
+  };
+
+  const handleSave = (updatedPost: BlogPost) => {
+    updatePost(updatedPost);
+    setPosts(
+      posts.map(post => (post.id === updatedPost.id ? updatedPost : post))
+    );
+    setEditModalOpen(false);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (selectedPost) {
+      deletePost(selectedPost.id);
+      setPosts(posts.filter(post => post.id !== selectedPost.id));
+      setDeleteModalOpen(false);
+    }
+  };
+
+  // 点击图片预览
+  const handleImageClick = (imageUrl: string) => {
+    setImagePreviewUrl(imageUrl);
+  };
+
+  // 关闭图片预览
+  const handleCloseImagePreview = () => {
+    setImagePreviewUrl(null);
+  };
+
+  return (
+    <>
+      <div className="content-area home-container">
+        <div className="home-sidebar">
+          <section className="home-profile-section">
+            <div className="home-profile-info">
+              <Link to="/profile" className="home-avatar-container">
+                <img src={profile.avatar} alt="头像" className="home-avatar" />
+              </Link>
+              <Link to="/profile">
+                <h1>{profile.name}</h1>
+              </Link>
+              <p className="home-bio">{profile.bio}</p>
+              <div className="home-social-links">
+                {profile.socialLinks.map(
+                  link =>
+                    link.url && (
+                      <a
+                        key={link.id}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span className="social-icon">{link.icon}</span>
+                        {link.platform}
+                      </a>
+                    )
+                )}
+              </div>
+            </div>
+          </section>
+
+          <section className="home-categories-section">
+            <h3>文章分类</h3>
+            <div className="home-categories-list">
+              {Array.from(new Set(posts.flatMap(post => post.tags))).map(
+                tag => {
+                  const count = posts.filter(post =>
+                    post.tags.includes(tag)
+                  ).length;
+                  return (
+                    <div key={tag} className="home-category-item">
+                      <span className="category-name">{tag}</span>
+                      <span className="category-count">({count})</span>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+          </section>
+
+          <section className="home-archive-section">
+            <h3>文章归档</h3>
+            <div className="home-archive-list">
+              {Array.from(
+                new Set(
+                  posts.map(post => {
+                    const date = new Date(post.date);
+                    return `${date.getFullYear()}年${String(date.getMonth() + 1).padStart(2, '0')}月`;
+                  })
+                )
+              )
+                .sort()
+                .reverse()
+                .map(monthYear => {
+                  const count = posts.filter(post => {
+                    const date = new Date(post.date);
+                    const postMonthYear = `${date.getFullYear()}年${String(date.getMonth() + 1).padStart(2, '0')}月`;
+                    return postMonthYear === monthYear;
+                  }).length;
+                  return (
+                    <div key={monthYear} className="home-archive-item">
+                      <span className="archive-date">{monthYear}</span>
+                      <span className="archive-count">({count})</span>
+                    </div>
+                  );
+                })}
+            </div>
+          </section>
+        </div>
+
+        <section className="recent-posts">
+          <div className="home-post-list">
+            {posts.map(post => (
+              <article key={post.id} className="home-post-card">
+                <div className="home-post-card-actions">
+                  <button
+                    className="home-post-card-action edit-action"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleEdit(post);
+                    }}
+                    title="编辑文章"
+                  >
+                    <span>
+                      <svg viewBox="0 0 24 24" width="18" height="18">
+                        <path
+                          fill="currentColor"
+                          d="M19.4 7.34L16.66 4.6A2 2 0 0014 4.53l-9 9a2 2 0 00-.57 1.21L4 18.91a1 1 0 00.29.8A1 1 0 005 20h.09l4.17-.38a2 2 0 001.21-.57l9-9a1.92 1.92 0 00-.07-2.71zM9.08 17.62l-3 .28.27-3L12 9.32l2.7 2.7zM16 10.68L13.32 8l1.95-2L18 8.73z"
+                        />
+                      </svg>
+                    </span>
+                  </button>
+                  <button
+                    className="home-post-card-action delete-action"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleDelete(post);
+                    }}
+                    title="删除文章"
+                  >
+                    <span>
+                      <svg viewBox="0 0 24 24" width="18" height="18">
+                        <path
+                          fill="currentColor"
+                          d="M19 7a1 1 0 00-1 1v11.191A1.92 1.92 0 0016.191 21H7.81A1.92 1.92 0 016 19.191V8a1 1 0 00-2 0v11.191A3.918 3.918 0 007.81 23h8.381A3.918 3.918 0 0020 19.191V8a1 1 0 00-1-1zm1-3h-4V3a1 1 0 00-1-1H9a1 1 0 00-1 1v1H4a1 1 0 000 2h16a1 1 0 000-2zM10 3h4v1h-4z"
+                        />
+                        <path
+                          fill="currentColor"
+                          d="M9 17V9a1 1 0 00-2 0v8a1 1 0 002 0zm4 0V9a1 1 0 00-2 0v8a1 1 0 002 0zm4 0V9a1 1 0 00-2 0v8a1 1 0 002 0z"
+                        />
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+                <Link to={`/post/${post.id}`} className="home-post-card-link">
+                  {post.imageUrl && (
+                    <div className="home-post-image">
+                      <img src={post.imageUrl} alt={post.title} />
+                      <div
+                        className="home-post-image-overlay"
+                        onClick={e => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          post.imageUrl && handleImageClick(post.imageUrl);
+                        }}
+                        title="点击查看大图"
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                          fill="white"
+                        >
+                          <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                  <div className="home-post-content">
+                    <h3 className="home-post-title">{post.title}</h3>
+                    <p className="home-post-meta">
+                      <span className="home-post-date">{post.date}</span>
+                      <span className="home-post-tags">
+                        {post.tags.map(tag => (
+                          <span key={tag} className="home-tag">
+                            {tag}
+                          </span>
+                        ))}
+                      </span>
+                    </p>
+                    <p className="home-post-excerpt">{post.excerpt}</p>
+                  </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <EditModal
+        post={selectedPost}
+        isOpen={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        onSave={handleSave}
+      />
+      <DeleteModal
+        post={selectedPost}
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onConfirm={handleDeleteConfirm}
+      />
+      {imagePreviewUrl && (
+        <div
+          className="image-preview-overlay"
+          onClick={handleCloseImagePreview}
+        >
+          <div className="image-preview-container">
+            <img src={imagePreviewUrl} alt="预览图片" />
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 interface EditModalProps {
   post: BlogPost | null;
   isOpen: boolean;
@@ -11,7 +257,12 @@ interface EditModalProps {
   onSave: (post: BlogPost) => void;
 }
 
-const EditModal: React.FC<EditModalProps> = ({ post, isOpen, onClose, onSave }) => {
+const EditModal: React.FC<EditModalProps> = ({
+  post,
+  isOpen,
+  onClose,
+  onSave,
+}) => {
   const [title, setTitle] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -49,7 +300,7 @@ const EditModal: React.FC<EditModalProps> = ({ post, isOpen, onClose, onSave }) 
         ...post,
         title,
         excerpt,
-        imageUrl
+        imageUrl,
       });
     }
     onClose();
@@ -121,185 +372,32 @@ interface DeleteModalProps {
   onConfirm: () => void;
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ post, isOpen, onClose, onConfirm }) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({
+  post,
+  isOpen,
+  onClose,
+  onConfirm,
+}) => {
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content delete-modal" onClick={e => e.stopPropagation()}>
+      <div
+        className="modal-content delete-modal"
+        onClick={e => e.stopPropagation()}
+      >
         <h2>确认删除</h2>
-        <p>确定要删除文章 "{post?.title}" 吗？此操作不可撤销。</p>
+        <p>确定要删除文章 &quot;{post?.title}&quot; 吗？此操作不可撤销。</p>
         <div className="modal-actions">
-          <button onClick={onClose} className="cancel-button">取消</button>
-          <button onClick={onConfirm} className="delete-button">删除</button>
+          <button onClick={onClose} className="cancel-button">
+            取消
+          </button>
+          <button onClick={onConfirm} className="delete-button">
+            删除
+          </button>
         </div>
       </div>
     </div>
-  );
-};
-
-const Home: React.FC = () => {
-  const { profile } = useProfile();
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
-
-  const handleEdit = (post: BlogPost) => {
-    setSelectedPost(post);
-    setEditModalOpen(true);
-  };
-
-  const handleDelete = (post: BlogPost) => {
-    setSelectedPost(post);
-    setDeleteModalOpen(true);
-  };
-
-  const handleSave = (updatedPost: BlogPost) => {
-    updatePost(updatedPost);
-    setPosts(posts.map(post => post.id === updatedPost.id ? updatedPost : post));
-    setEditModalOpen(false);
-  };
-
-  const handleDeleteConfirm = () => {
-    if (selectedPost) {
-      deletePost(selectedPost.id);
-      setPosts(posts.filter(post => post.id !== selectedPost.id));
-      setDeleteModalOpen(false);
-    }
-  };
-
-  const handleImageClick = (imageUrl: string) => {
-    setImagePreviewUrl(imageUrl);
-  };
-
-  const handleCloseImagePreview = () => {
-    setImagePreviewUrl(null);
-  };
-
-  return (
-    <>
-      <div className="content-area home-page">
-        <section className="home-profile-section">
-          <div className="home-profile-info">
-            <Link to="/profile" className="home-avatar-container">
-              <img src={profile.avatar} alt="头像" className="home-avatar" />
-            </Link>
-            <Link to="/profile"><h1>{profile.name}</h1></Link>
-            <p className="home-bio">{profile.bio}</p>
-            <div className="home-social-links">
-              {profile.socialLinks.github && (
-                <a href={profile.socialLinks.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-              )}
-              {profile.socialLinks.twitter && (
-                <a href={profile.socialLinks.twitter} target="_blank" rel="noopener noreferrer">Twitter</a>
-              )}
-              {profile.socialLinks.website && (
-                <a href={profile.socialLinks.website} target="_blank" rel="noopener noreferrer">个人网站</a>
-              )}
-            </div>
-          </div>
-        </section>
-
-        <section className="recent-posts">
-          <h2>学习笔记</h2>
-          <div className="home-post-list">
-            {posts.map(post => (
-              <article key={post.id} className="home-post-card">
-                <div className="home-post-card-actions">
-                  <button
-                    className="home-post-card-action edit-action"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleEdit(post);
-                    }}
-                    title="编辑文章"
-                  >
-                    <span>
-                      <svg viewBox="0 0 24 24" width="18" height="18">
-                        <path fill="currentColor" d="M19.4 7.34L16.66 4.6A2 2 0 0014 4.53l-9 9a2 2 0 00-.57 1.21L4 18.91a1 1 0 00.29.8A1 1 0 005 20h.09l4.17-.38a2 2 0 001.21-.57l9-9a1.92 1.92 0 00-.07-2.71zM9.08 17.62l-3 .28.27-3L12 9.32l2.7 2.7zM16 10.68L13.32 8l1.95-2L18 8.73z"/>
-                      </svg>
-                    </span>
-                  </button>
-                  <button
-                    className="home-post-card-action delete-action"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleDelete(post);
-                    }}
-                    title="删除文章"
-                  >
-                    <span>
-                      <svg viewBox="0 0 24 24" width="18" height="18">
-                        <path fill="currentColor" d="M19 7a1 1 0 00-1 1v11.191A1.92 1.92 0 0016.191 21H7.81A1.92 1.92 0 016 19.191V8a1 1 0 00-2 0v11.191A3.918 3.918 0 007.81 23h8.381A3.918 3.918 0 0020 19.191V8a1 1 0 00-1-1zm1-3h-4V3a1 1 0 00-1-1H9a1 1 0 00-1 1v1H4a1 1 0 000 2h16a1 1 0 000-2zM10 3h4v1h-4z"/>
-                        <path fill="currentColor" d="M9 17V9a1 1 0 00-2 0v8a1 1 0 002 0zm4 0V9a1 1 0 00-2 0v8a1 1 0 002 0zm4 0V9a1 1 0 00-2 0v8a1 1 0 002 0z"/>
-                      </svg>
-                    </span>
-                  </button>
-                </div>
-                <Link to={`/post/${post.id}`} className="home-post-card-link">
-                  {post.imageUrl && (
-                    <div className="home-post-image">
-                      <img 
-                        src={post.imageUrl} 
-                        alt={post.title}
-                      />
-                      <div 
-                        className="home-post-image-overlay"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          post.imageUrl && handleImageClick(post.imageUrl);
-                        }}
-                        title="点击查看大图"
-                      >
-                        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
-                          <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                        </svg>
-                      </div>
-                    </div>
-                  )}
-                  <div className="home-post-content">
-                    <h3 className="home-post-title">{post.title}</h3>
-                    <p className="home-post-meta">
-                      <span className="home-post-date">{post.date}</span>
-                      <span className="home-post-tags">
-                        {post.tags.map(tag => (
-                          <span key={tag} className="home-tag">{tag}</span>
-                        ))}
-                      </span>
-                    </p>
-                    <p className="home-post-excerpt">{post.excerpt}</p>
-                  </div>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
-      </div>
-      <EditModal
-        post={selectedPost}
-        isOpen={editModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        onSave={handleSave}
-      />
-      <DeleteModal
-        post={selectedPost}
-        isOpen={deleteModalOpen}
-        onClose={() => setDeleteModalOpen(false)}
-        onConfirm={handleDeleteConfirm}
-      />
-      {imagePreviewUrl && (
-        <div className="image-preview-overlay" onClick={handleCloseImagePreview}>
-          <div className="image-preview-container">
-            <img src={imagePreviewUrl} alt="预览图片" />
-          </div>
-        </div>
-      )}
-    </>
   );
 };
 

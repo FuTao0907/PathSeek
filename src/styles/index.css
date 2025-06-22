@@ -1,13 +1,218 @@
-body {
+/**
+ * 主CSS入口文件
+ * 整合所有样式模块，建立完整的CSS架构
+ */
+
+/* ==========================================================================
+   0. Tailwind CSS基础样式
+   ========================================================================== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   1. CSS变量和设计令牌
+   ========================================================================== */
+@import './variables.css';
+
+/* ==========================================================================
+   2. 基础重置和标准化
+   ========================================================================== */
+
+/* 现代CSS重置 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+}
+
+html {
+  /* 防止iOS中的字体大小调整 */
+  -webkit-text-size-adjust: 100%;
+  /* 启用平滑滚动 */
+  scroll-behavior: smooth;
+}
+
+/* 尊重用户的动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+
+  /* 改善字体渲染 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  /* 防止水平滚动 */
+  overflow-x: hidden;
+
+  /* 设置最小高度 */
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* 媒体元素 */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 表单元素 */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* 移除按钮默认样式 */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 链接样式 */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover,
+a:focus {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* 焦点样式 */
+:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: var(--font-family-mono);
+  font-size: 0.875em;
+  background-color: var(--bg-code-inline);
+  padding: 0.125em 0.25em;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-muted);
+}
+
+/* ==========================================================================
+   3. 布局和容器
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow-width);
+}
+
+.container--wide {
+  max-width: var(--container-wide-width);
+}
+
+/* ==========================================================================
+   4. 组件样式
+   ========================================================================== */
+@import './components.css';
+
+/* ==========================================================================
+   5. Markdown内容样式
+   ========================================================================== */
+@import './markdown.css';
+
+/* ==========================================================================
+   6. 工具类
+   ========================================================================== */
+@import './utilities.css';
+
+/* ==========================================================================
+   7. 响应式设计
+   ========================================================================== */
+@import './responsive.css';
+
+/* ==========================================================================
+   8. 主题特定样式
+   ========================================================================== */
+
+/* 深色主题特定调整 */
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+[data-theme='dark'] img {
+  opacity: 0.9;
+  transition: opacity var(--transition-base);
+}
+
+[data-theme='dark'] img:hover {
+  opacity: 1;
+}
+
+/* 高对比度主题特定调整 */
+[data-theme='high-contrast'] {
+  color-scheme: light dark;
+}
+
+[data-theme='high-contrast'] * {
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme='high-contrast'] button,
+[data-theme='high-contrast'] input,
+[data-theme='high-contrast'] select,
+[data-theme='high-contrast'] textarea {
+  border: 2px solid var(--color-border-strong) !important;
+}
+
+/* 护眼主题特定调整 */
+[data-theme='eye-care'] {
+  filter: sepia(0.1) saturate(0.8);
 }

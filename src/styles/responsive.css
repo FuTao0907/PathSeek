@@ -1,0 +1,306 @@
+/* 响应式设计模块 */
+@import './variables.css';
+
+/* 基础响应式容器 */
+.responsive-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* 内容容器 */
+.content {
+  max-width: 1280px;
+  width: 100%;
+  min-height: calc(100vh - var(--navbar-height, 80px));
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  overflow: hidden;
+  /* 隐藏滚动条 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  background: transparent;
+}
+
+/* 流体排版系统 */
+.fluid-text-xs {
+  font-size: clamp(0.7rem, 1.5vw, var(--font-size-xs));
+}
+.fluid-text-sm {
+  font-size: clamp(0.8rem, 2vw, var(--font-size-sm));
+}
+.fluid-text-base {
+  font-size: clamp(0.9rem, 2.5vw, var(--font-size-base));
+}
+.fluid-text-lg {
+  font-size: clamp(1rem, 3vw, var(--font-size-lg));
+}
+.fluid-text-xl {
+  font-size: clamp(1.1rem, 3.5vw, var(--font-size-xl));
+}
+.fluid-text-2xl {
+  font-size: clamp(1.3rem, 4vw, var(--font-size-2xl));
+}
+.fluid-text-3xl {
+  font-size: clamp(1.6rem, 5vw, var(--font-size-3xl));
+}
+.fluid-text-4xl {
+  font-size: clamp(2rem, 6vw, var(--font-size-4xl));
+}
+.fluid-text-5xl {
+  font-size: clamp(2.5rem, 8vw, var(--font-size-5xl));
+}
+
+/* 流体间距系统 */
+.fluid-spacing-sm {
+  margin: clamp(0.5rem, 2vw, var(--spacing-sm));
+}
+.fluid-spacing-md {
+  margin: clamp(0.75rem, 3vw, var(--spacing-md));
+}
+.fluid-spacing-lg {
+  margin: clamp(1rem, 4vw, var(--spacing-lg));
+}
+.fluid-spacing-xl {
+  margin: clamp(1.5rem, 5vw, var(--spacing-xl));
+}
+.fluid-spacing-2xl {
+  margin: clamp(2rem, 6vw, var(--spacing-2xl));
+}
+.fluid-spacing-3xl {
+  margin: clamp(2.5rem, 8vw, var(--spacing-3xl));
+}
+
+/* 响应式网格系统 */
+.responsive-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.responsive-grid-2 {
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.responsive-grid-3 {
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* 响应式 Flexbox */
+.responsive-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+}
+
+.responsive-flex > * {
+  flex: 1 1 300px;
+}
+
+/* 平板设备优化 (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-container {
+    padding: 0 var(--spacing-xl);
+  }
+
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+  }
+
+  .responsive-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .responsive-grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+/* 移动设备优化 (最大 768px) */
+@media (max-width: 768px) {
+  .responsive-container {
+    padding: 0 var(--spacing-lg);
+  }
+
+  .responsive-grid,
+  .responsive-grid-2,
+  .responsive-grid-3 {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .responsive-flex {
+    flex-direction: column;
+  }
+
+  .responsive-flex > * {
+    flex: 1 1 auto;
+  }
+
+  /* 移动端隐藏/显示 */
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile {
+    display: block !important;
+  }
+
+  /* 移动端文本对齐 */
+  .mobile-text-center {
+    text-align: center;
+  }
+
+  .mobile-text-left {
+    text-align: left;
+  }
+}
+
+/* 小屏移动设备优化 (最大 480px) */
+@media (max-width: 480px) {
+  .responsive-container {
+    padding: 0 var(--spacing-md);
+  }
+
+  /* 超小屏隐藏/显示 */
+  .hide-xs {
+    display: none !important;
+  }
+
+  .show-xs {
+    display: block !important;
+  }
+}
+
+/* 桌面设备优化 (最小 1024px) */
+@media (min-width: 1024px) {
+  .responsive-container {
+    padding: 0 var(--spacing-2xl);
+  }
+
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-2xl);
+  }
+
+  .responsive-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-2xl);
+  }
+
+  .responsive-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+  }
+
+  /* 桌面端隐藏/显示 */
+  .hide-desktop {
+    display: none !important;
+  }
+
+  .show-desktop {
+    display: block !important;
+  }
+}
+
+/* 大屏设备优化 (最小 1280px) */
+@media (min-width: 1280px) {
+  .responsive-container {
+    max-width: 1400px;
+    padding: 0 var(--spacing-3xl);
+  }
+
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+
+  .responsive-grid-3 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 容器查询支持 (现代浏览器) */
+@supports (container-type: inline-size) {
+  .responsive-container {
+    container-type: inline-size;
+  }
+
+  @container (max-width: 600px) {
+    .container-responsive {
+      flex-direction: column;
+    }
+  }
+
+  @container (min-width: 600px) {
+    .container-responsive {
+      flex-direction: row;
+    }
+  }
+}
+
+/* 打印样式优化 */
+@media print {
+  .responsive-container {
+    max-width: none;
+    padding: 0;
+  }
+
+  .hide-print {
+    display: none !important;
+  }
+
+  .responsive-grid,
+  .responsive-grid-2,
+  .responsive-grid-3 {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* 横屏移动设备优化 */
+@media (max-height: 500px) and (orientation: landscape) {
+  .landscape-optimize {
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+/* 高分辨率屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-optimize {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  .touch-optimize {
+    min-height: 44px;
+    min-width: 44px;
+    padding: var(--spacing-md);
+  }
+
+  .touch-optimize:hover {
+    transform: none;
+  }
+}
+
+/* 鼠标设备优化 */
+@media (hover: hover) and (pointer: fine) {
+  .hover-optimize:hover {
+    transform: translateY(-2px);
+    transition: transform var(--transition-base);
+  }
+}

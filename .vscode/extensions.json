@@ -1,0 +1,74 @@
+{
+  "recommendations": [
+    // TypeScript 和 JavaScript 支持
+    "ms-vscode.vscode-typescript-next",
+    
+    // 代码格式化和质量
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    
+    // React 开发
+    "ms-vscode.vscode-react-refactor",
+    "formulahendry.auto-rename-tag",
+    "bradlc.vscode-tailwindcss",
+    
+    // Git 支持
+    "eamodio.gitlens",
+    "github.vscode-pull-request-github",
+    "github.copilot",
+    "github.copilot-chat",
+    
+    // 测试支持
+    "orta.vscode-jest",
+    "ms-vscode.test-adapter-converter",
+    
+    // 调试和开发工具
+    "ms-vscode.vscode-json",
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "ms-vscode.vscode-node-azure-pack",
+    
+    // 代码片段和自动完成
+    "ms-vscode.vscode-typescript-next",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-close-tag",
+    
+    // 主题和图标
+    "pkief.material-icon-theme",
+    "zhuangtongfa.material-theme",
+    
+    // 实用工具
+    "streetsidesoftware.code-spell-checker",
+    "ms-vscode.hexeditor",
+    "redhat.vscode-yaml",
+    "ms-vscode.vscode-markdown",
+    
+    // 性能和监控
+    "ms-vscode.vscode-performance",
+    "ms-vscode.vscode-webpack-analyzer",
+    
+    // 安全性
+    "snyk-security.snyk-vulnerability-scanner",
+    
+    // 可访问性
+    "deque-systems.vscode-axe-linter",
+    
+    // 文档和注释
+    "aaron-bond.better-comments",
+    "ms-vscode.vscode-jsdoc",
+    
+    // 代码导航
+    "ms-vscode.vscode-goto-next-previous-member",
+    "ms-vscode.references-view",
+    
+    // 环境和配置
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode.remote-repositories"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript",
+    "hookyqr.beautify",
+    "ms-vscode.vscode-css-peek"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "scripts": {
+    "css:build": "postcss src/styles/index.css -o dist/css/styles.css --config postcss.config.js",
+    "css:build:watch": "postcss src/styles/index.css -o dist/css/styles.css --config postcss.config.js --watch",
+    "css:build:prod": "cross-env NODE_ENV=production postcss src/styles/index.css -o dist/css/styles.min.css --config postcss.config.js",
+    "css:lint": "stylelint \"src/**/*.css\" --config .stylelintrc.js",
+    "css:lint:fix": "stylelint \"src/**/*.css\" --config .stylelintrc.js --fix",
+    "css:test": "node -e \"require('./src/utils/cssTestUtils.ts').runAllCSSTests()\"",
+    "css:analyze": "node scripts/css-tools.js analyze",
+    "css:docs": "node scripts/css-tools.js docs",
+    "css:clean": "node scripts/css-tools.js clean",
+    "css:watch": "node scripts/css-tools.js watch",
+    "css:all": "node scripts/css-tools.js all",
+    "dev:css": "concurrently \"npm run css:watch\" \"npm run css:build:watch\"",
+    "build:css": "npm run css:clean && npm run css:build:prod",
+    "theme:test": "node -e \"const { testThemeSwitching } = require('./src/utils/cssTestUtils.ts'); testThemeSwitching();\"",
+    "theme:validate": "node -e \"const { validateThemeConfig } = require('./src/utils/theme.ts'); const { themePresets } = require('./src/config/themes.ts'); themePresets.forEach(preset => console.log(preset.name + ':', validateThemeConfig(preset.config)));\""
+  },
+  "devDependencies": {
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-custom-properties": "^13.3.2",
+    "postcss-custom-media": "^10.0.2",
+    "postcss-nesting": "^12.0.1",
+    "postcss-preset-env": "^9.3.0",
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-config-css-modules": "^4.3.0",
+    "stylelint-order": "^6.0.3",
+    "stylelint-declaration-strict-value": "^1.9.2",
+    "chokidar": "^3.5.3",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3"
+  },
+  "css-architecture": {
+    "description": "Modern CSS architecture with design tokens and theme system",
+    "features": [
+      "CSS Variables (Custom Properties)",
+      "Design Token System",
+      "Multi-theme Support",
+      "Responsive Design",
+      "Accessibility Features",
+      "Component-based Architecture",
+      "Utility Classes",
+      "PostCSS Processing",
+      "Stylelint Integration",
+      "Automated Testing"
+    ],
+    "structure": {
+      "src/styles/": {
+        "variables.css": "Design tokens and CSS variables",
+        "components.css": "Component-specific styles",
+        "utilities.css": "Utility classes",
+        "markdown.css": "Markdown content styles",
+        "responsive.css": "Responsive design rules",
+        "index.css": "Main entry point"
+      },
+      "src/types/theme.ts": "TypeScript type definitions for theme system",
+      "src/config/themes.ts": "Theme presets and configuration",
+      "src/utils/theme.ts": "Theme utility functions",
+      "src/utils/cssTestUtils.ts": "CSS testing utilities",
+      "src/components/ThemeToggle.tsx": "Theme switching component"
+    },
+    "build": {
+      "input": "src/styles/index.css",
+      "output": "dist/css/styles.css",
+      "minified": "dist/css/styles.min.css",
+      "processor": "PostCSS",
+      "plugins": [
+        "postcss-import",
+        "postcss-custom-properties",
+        "postcss-custom-media",
+        "postcss-nesting",
+        "postcss-preset-env",
+        "autoprefixer",
+        "cssnano (production)"
+      ]
+    },
+    "quality": {
+      "linter": "Stylelint",
+      "config": ".stylelintrc.js",
+      "rules": "Standard + CSS Modules + Custom",
+      "testing": "Custom CSS test utilities",
+      "analysis": "Built-in CSS analysis tools"
+    },
+    "themes": {
+      "default": "Light theme",
+      "dark": "Dark theme",
+      "high-contrast": "High contrast theme",
+      "eye-care": "Eye care theme",
+      "auto": "System preference"
+    },
+    "accessibility": {
+      "reduced-motion": "Respects prefers-reduced-motion",
+      "high-contrast": "Supports prefers-contrast",
+      "color-scheme": "Supports prefers-color-scheme",
+      "focus-visible": "Enhanced focus indicators",
+      "screen-reader": "Screen reader optimizations"
+    },
+    "performance": {
+      "css-variables": "Runtime theme switching without rebuilds",
+      "modular": "Component-based CSS loading",
+      "minification": "Production CSS minification",
+      "purging": "Unused CSS removal",
+      "caching": "CSS variable caching"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "timestamp": "2025-06-21T15:54:25.306Z",
+  "results": {
+    "passed": 2,
+    "failed": 3,
+    "warnings": 1,
+    "total": 6,
+    "typeCheck": false,
+    "lint": false,
+    "format": true,
+    "test": true,
+    "security": "warning",
+    "build": false
+  },
+  "checks": [
+    {
+      "name": "TypeScript 类型检查",
+      "command": "npm run type-check",
+      "required": true,
+      "status": "failed"
+    },
+    {
+      "name": "ESLint 代码检查",
+      "command": "npm run lint:check",
+      "required": true,
+      "status": "failed"
+    },
+    {
+      "name": "Prettier 格式检查",
+      "command": "npm run format:check",
+      "required": true,
+      "status": "passed"
+    },
+    {
+      "name": "单元测试",
+      "command": "npm run test:ci",
+      "required": true,
+      "status": "passed"
+    },
+    {
+      "name": "安全漏洞检查",
+      "command": "npm audit --audit-level=moderate",
+      "required": false,
+      "status": "passed"
+    },
+    {
+      "name": "构建检查",
+      "command": "npm run build",
+      "required": true,
+      "status": "failed"
+    }
+  ]
+}

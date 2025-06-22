@@ -1,0 +1,402 @@
+/* CSS 变量系统 - 设计令牌 */
+:root {
+  /* ===== 颜色系统 ===== */
+  /* 渐变色 */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --success-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  --warning-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+
+  /* 主色调 */
+  --primary-color: #667eea;
+  --primary-dark: #764ba2;
+  --primary-darker: #1d4ed8;
+  --primary-hover: #5a67d8;
+  --primary-light: rgba(102, 126, 234, 0.2);
+  --primary-glow: rgba(102, 126, 234, 0.1);
+  --primary-overlay: rgba(102, 126, 234, 0.1);
+  --secondary-color: #f093fb;
+  --secondary-dark: #f5576c;
+  --accent-color: #4facfe;
+  --accent-dark: #00f2fe;
+
+  /* 状态颜色 */
+  --success-color: #10b981;
+  --success-dark: #059669;
+  --success-darker: #047857;
+  --success-light: rgba(16, 185, 129, 0.1);
+  --warning-color: #f59e0b;
+  --warning-dark: #b45309;
+  --warning-light: #fde68a;
+  --error-color: #ef4444;
+  --error-dark: #dc2626;
+  --error-darker: #b91c1c;
+  --info-color: #3b82f6;
+  --pink-color: #be185d;
+  --pink-dark: #9d174d;
+  --pink-light: #fbcfe8;
+  --pink-bg: #fce7f3;
+
+  /* 文本颜色 */
+  --text-primary: #1e293b;
+  --text-secondary: #374151;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --text-white: #ffffff;
+  --text-code: #dc2626;
+  --text-color: var(--text-primary); /* 别名 */
+
+  /* 背景颜色 */
+  --bg-primary: rgba(255, 255, 255, 0.98);
+  --bg-secondary: rgba(248, 250, 252, 0.9);
+  --bg-tertiary: #f1f5f9;
+  --bg-quaternary: #e2e8f0;
+  --bg-glass: rgba(255, 255, 255, 0.1);
+  --bg-glass-hover: rgba(255, 255, 255, 0.15);
+  --bg-code: #1a1a1a;
+  --bg-code-inline: rgba(102, 126, 234, 0.1);
+  --bg-main: var(--bg-primary); /* 别名 */
+  --surface-color: var(--bg-secondary); /* 别名 */
+  --code-bg: var(--bg-code); /* 别名 */
+  --code-text: var(--text-code); /* 别名 */
+  --overlay-dark: rgba(0, 0, 0, 0.3);
+  --secondary-glow: rgba(139, 92, 246, 0.05);
+  --secondary-overlay: rgba(118, 75, 162, 0.05);
+
+  /* 边框颜色 */
+  --border-primary: rgba(255, 255, 255, 0.4);
+  --border-secondary: #cbd5e1;
+  --border-accent: rgba(102, 126, 234, 0.2);
+  --border-muted: #e2e8f0;
+  --border-color: #e2e8f0; /* 别名 */
+
+  /* 警告相关颜色 */
+  --warning-bg: rgba(251, 191, 36, 0.1);
+  --warning-text: #92400e;
+
+  /* ===== 阴影和焦点系统 ===== */
+  --box-shadow: var(--shadow-md); /* 别名 */
+  --focus-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+
+  /* 阴影系统 */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 12px 35px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.12);
+  --shadow-primary: 0 8px 25px rgba(102, 126, 234, 0.4);
+  --shadow-primary-light:
+    0 10px 15px -3px rgba(59, 130, 246, 0.1),
+    0 4px 6px -2px rgba(59, 130, 246, 0.05);
+  --shadow-primary-hover:
+    0 15px 25px -5px rgba(59, 130, 246, 0.5),
+    0 8px 10px -3px rgba(59, 130, 246, 0.4);
+  --shadow-secondary: 0 8px 25px rgba(240, 147, 251, 0.4);
+  --shadow-success: rgba(22, 163, 74, 0.4);
+  --shadow-success-light: rgba(22, 163, 74, 0.3);
+  --shadow-warning: rgba(217, 119, 6, 0.4);
+  --shadow-warning-light: rgba(217, 119, 6, 0.3);
+  --shadow-pink: rgba(190, 24, 93, 0.4);
+  --shadow-pink-light: rgba(190, 24, 93, 0.3);
+  --shadow-muted:
+    0 10px 15px -3px rgba(100, 116, 139, 0.3),
+    0 4px 6px -2px rgba(100, 116, 139, 0.2);
+  --shadow-error: rgba(239, 68, 68, 0.4);
+  --shimmer-color: rgba(255, 255, 255, 0.3);
+
+  /* ===== 字体系统 ===== */
+  --font-family-base:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', sans-serif;
+  --font-family-mono: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  --font-family-serif: Georgia, 'Times New Roman', serif;
+
+  /* 字体大小 */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+
+  /* 字体权重 */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* 行高 */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 1.8;
+
+  /* ===== 间距和尺寸系统 ===== */
+  /* 间距系统 */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.25rem;
+  --spacing-2xl: 1.5rem;
+  --spacing-3xl: 2rem;
+  --spacing-4xl: 2.5rem;
+  --spacing-5xl: 3rem;
+  --spacing-6xl: 4rem;
+
+  /* 容器宽度 */
+  --container-max-width: 1200px;
+  --container-narrow-width: 768px;
+  --container-wide-width: 1400px;
+
+  /* 圆角系统 */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+  --radius-full: 50%;
+
+  /* ===== 动画和交互系统 ===== */
+  /* 过渡动画 */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.4s ease;
+  --transition-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-index 层级 */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+  --z-floating: 1090;
+
+  /* ===== 效果系统 ===== */
+  /* 模糊效果 */
+  --blur-sm: 10px;
+  --blur-md: 15px;
+  --blur-lg: 25px;
+
+  /* 边框宽度 */
+  --border-width-sm: 1px;
+  --border-width-md: 2px;
+  --border-width-lg: 3px;
+  --border-width-xl: 4px;
+
+  /* ===== 组件尺寸系统 ===== */
+  /* 组件尺寸 */
+  --navbar-height: 80px;
+  --navbar-height-extended: 120px;
+  --modal-width-sm: 400px;
+  --modal-width-md: 600px;
+  --modal-width-lg: 800px;
+  --modal-width-xl: 1000px;
+  --textarea-min-height: 120px;
+
+  /* 图标尺寸 */
+  --icon-size-xs: 16px;
+  --icon-size-sm: 20px;
+  --icon-size-md: 24px;
+  --icon-size-lg: 32px;
+  --icon-size-xl: 40px;
+  --icon-size-2xl: 48px;
+  --icon-size-3xl: 60px;
+
+  /* 图片尺寸 */
+  --image-preview-height: 200px;
+  --image-preview-height-sm: 150px;
+  --image-preview-height-lg: 300px;
+
+  /* 按钮尺寸 */
+  --button-min-width: 120px;
+  --button-min-width-sm: 80px;
+  --button-min-width-lg: 160px;
+
+  /* 字母间距 */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wider: 0.1em;
+
+  /* ===== 响应式断点系统 ===== */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* ===== 主题模式变量定义 ===== */
+
+/* 深色模式 - 通过data-theme属性 */
+[data-theme='dark'] {
+  /* 主色调 */
+  --primary-color: #60a5fa;
+  --primary-light: #93c5fd;
+  --primary-dark: #3b82f6;
+  --secondary-color: #818cf8;
+  --secondary-light: #a5b4fc;
+  --secondary-dark: #6366f1;
+
+  /* 文本颜色 */
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-light: #1f2937;
+  --text-white: #ffffff;
+  --text-code: #e5e7eb;
+  --text-color: #f9fafb;
+
+  /* 背景颜色 */
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --bg-glass: rgba(17, 24, 39, 0.8);
+  --bg-glass-hover: rgba(17, 24, 39, 0.9);
+  --bg-code: #1f2937;
+  --bg-main: #111827;
+  --surface-color: #1f2937;
+  --code-bg: #1f2937;
+  --code-text: #e5e7eb;
+
+  /* 边框颜色 */
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+  --border-accent: rgba(96, 165, 250, 0.3);
+  --border-muted: #1f2937;
+  --border-color: #374151;
+
+  /* 状态颜色 */
+  --success-color: #34d399;
+  --warning-color: #fbbf24;
+  --error-color: #f87171;
+  --info-color: #38bdf8;
+
+  /* 警告相关颜色 */
+  --warning-bg: rgba(251, 191, 36, 0.2);
+  --warning-text: #fbbf24;
+
+  /* 交互颜色 */
+  --primary-hover: #6366f1;
+  --primary-light: rgba(96, 165, 250, 0.2);
+
+  /* 阴影调整 */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 35px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* 高对比度模式 */
+[data-theme='high-contrast'] {
+  /* 主色调 */
+  --primary-color: #000000;
+  --primary-light: #333333;
+  --primary-dark: #000000;
+  --secondary-color: #000000;
+
+  /* 文本颜色 */
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --text-color: #000000;
+
+  /* 背景颜色 */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-main: #ffffff;
+  --surface-color: #f5f5f5;
+
+  /* 边框颜色 */
+  --border-primary: #000000;
+  --border-secondary: #333333;
+  --border-color: #000000;
+
+  /* 阴影增强 */
+  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* 护眼模式 */
+[data-theme='eye-care'] {
+  /* 主色调调整为暖色调 */
+  --primary-color: #d97706;
+  --primary-light: #f59e0b;
+  --primary-dark: #92400e;
+
+  /* 文本颜色 */
+  --text-primary: #451a03;
+  --text-secondary: #78350f;
+  --text-color: #451a03;
+
+  /* 背景颜色 - 暖色调 */
+  --bg-primary: #fef3c7;
+  --bg-secondary: #fde68a;
+  --bg-main: #fef3c7;
+  --surface-color: #fde68a;
+
+  /* 边框颜色 */
+  --border-primary: #d97706;
+  --border-secondary: #f59e0b;
+  --border-color: #d97706;
+}
+
+/* 媒体查询备用方案 - 深色模式 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* 当没有明确设置主题时，使用系统偏好 */
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --text-color: #f9fafb;
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-main: #111827;
+    --surface-color: #1f2937;
+    --border-primary: #374151;
+    --border-secondary: #4b5563;
+    --border-color: #374151;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  :root {
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 35px rgba(0, 0, 0, 0.5);
+    --border-primary: rgba(0, 0, 0, 0.8);
+    --border-secondary: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0s;
+    --transition-base: 0s;
+    --transition-slow: 0s;
+    --transition-cubic: 0s;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
